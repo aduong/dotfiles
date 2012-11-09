@@ -1,0 +1,5 @@
+escape      ^\\\
+vbell       off # turn off visual bell
+term        screen-256color
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+defbce      on
