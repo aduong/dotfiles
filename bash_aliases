@@ -15,8 +15,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# alias em='emacs -nw'
-# alias et='emclient'
+alias e='emacs -nw'
 
 # movement aliases
 alias ..='cd ..'
@@ -26,6 +25,8 @@ alias -- -='cd -'
 alias less='less -iS'   # case insensitive less, chop long lines
 alias bc='bc -lq'       # arbitrary precision calculator
 alias igrep="grep -i"   # case insensitive grep
+alias egrep="grep -E"   # extended regex grep
+alias rgrep="grep -r"   # recursive grep
 
 # alias xopen='xdg-open >/dev/null 2>&1'
 # alias sl='sl -e'
@@ -34,4 +35,9 @@ alias igrep="grep -i"   # case insensitive grep
 
 alias bc='bc -lq'
 
+alias json='python -mjson.tool'
+alias uri-escape='perl -MURI::Escape -E '\''foreach (@ARGV) { say uri_escape $_ }'\'
+alias uri-unescape='perl -MURI::Escape -E '\''foreach (@ARGV) { say uri_unescape $_ }'\'
+
 test -s ~/.xfce_aliases && . ~/.xfce_aliases
+test -s ~/.mac_aliases && . ~/.mac_aliases

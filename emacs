@@ -1,25 +1,21 @@
 (setq load-path (cons "~/.emacs.d/site" load-path))
 
-;;; cperl-mode is preferred to perl-mode                                        
-;;; "Brevity is the soul of wit" <foo at acm.org>                               
+;;; cperl-mode is preferred to perl-mode
+;;; "Brevity is the soul of wit" <foo at acm.org>
 (defalias 'perl-mode 'cperl-mode)
 
 ;;; use tt-mode when file ends in .tt or .tt2
 (autoload 'tt-mode "tt-mode" "Template toolkit editing mode." t)
 (add-to-list 'auto-mode-alist '("\.tt2?$" . tt-mode))
 
-(add-hook 'cperl-mode-hook
-		  '(lambda ()
-			 (define-key cperl-mode-map "\C-c\C-c" 'align)))
-
 (add-hook 'cperl-mode-hook 'hs-minor-mode)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(c-basic-offset 4)
  '(column-number-mode t)
  '(cperl-close-paren-offset -4)
@@ -28,14 +24,17 @@
  '(cperl-indent-level 4)
  '(cperl-indent-parens-as-block t)
  '(cperl-merge-trailing-else nil)
+ '(css-indent-offset 2)
  '(ecb-options-version "2.40")
  '(fill-column 80)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-buffer-choice nil)
+ '(js-indent-level 2)
  '(menu-bar-mode nil)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
+ '(show-trailing-whitespace t)
  '(tab-width 4)
  '(tool-bar-mode nil)
  '(truncate-line 1)
@@ -53,10 +52,46 @@
    kept-old-versions 2
    version-control t)       ; use versioned backups
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 1 :width normal :foundry "default" :family "default"))))
  '(cperl-array-face ((t (:foreground "yellow" :weight bold))))
  '(cperl-hash-face ((((class color) (background dark)) (:foreground "#AA0000" :weight bold)))))
+
+(add-to-list 'load-path "~/.emacs.d/site/scala-mode2/")
+(require 'scala-mode2)
+
+(require 'ido)
+(ido-mode 1)
+(ido-everywhere 1)
+(setq ido-enable-flex-matching t)
+(setq ido-create-new-buffer 'always)
+(defun ido-find-file-in-tag-files ()
+  (interactive)
+  (save-excursion
+    (let ((enable-recursive-minibuffers t))
+      (visit-tags-table-buffer))
+    (find-file
+     (expand-file-name
+      (ido-completing-read
+       "Project file: " (tags-table-files) nil t)))))
+(global-set-key "\C-xt" 'ido-find-file-in-tag-files)
+
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 5000)
+(global-set-key "\C-x\C-r" 'recentf-open-files)
+
+(require 'smart-tab)
+(global-smart-tab-mode 1)
+
+(global-unset-key "\C-c\C-c")
+(global-set-key "\C-c\C-c" 'comment-or-uncomment-region)
+
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  )
