@@ -33,11 +33,12 @@ alias rgrep="grep -r"   # recursive grep
 
 # alias reset-xfce4-volumed="pkill xfce4-volumed && xfce4-volumed"
 
-alias bc='bc -lq'
-
 alias json='python -mjson.tool'
 alias uri-escape='perl -MURI::Escape -E '\''foreach (@ARGV) { say uri_escape $_ }'\'
 alias uri-unescape='perl -MURI::Escape -E '\''foreach (@ARGV) { say uri_unescape $_ }'\'
+
+alias cbcopy='xsel --clipboard -i'
+alias cbpaste='xsel --clipboard -o'
 
 test -s ~/.xfce_aliases && . ~/.xfce_aliases
 test -s ~/.mac_aliases && . ~/.mac_aliases
