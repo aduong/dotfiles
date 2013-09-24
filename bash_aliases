@@ -1,7 +1,8 @@
 # ls aliases
-alias ll='ls -AlhF'
-alias la='ls -ACF'
-alias l='ls -CF'
+alias lt='ls -l -t --almost-all --classify --human-readable --reverse'
+alias ll='ls -l --almost-all --classify --human-readable'
+alias la='ls -C --almost-all --classify'
+alias l='ls -C --classify'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -15,8 +16,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-alias e='emacs -nw'
-
 # movement aliases
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -28,12 +27,14 @@ alias igrep="grep -i"   # case insensitive grep
 alias egrep="grep -E"   # extended regex grep
 alias rgrep="grep -r"   # recursive grep
 
-# alias xopen='xdg-open >/dev/null 2>&1'
-# alias sl='sl -e'
+alias rm="rm -I"        # safe rm
+
+alias sl='sl -e'
 
 # alias reset-xfce4-volumed="pkill xfce4-volumed && xfce4-volumed"
 
 alias json='python -mjson.tool'
+alias server='python -mSimpleHTTPServer'
 alias uri-escape='perl -MURI::Escape -E '\''foreach (@ARGV) { say uri_escape $_ }'\'
 alias uri-unescape='perl -MURI::Escape -E '\''foreach (@ARGV) { say uri_unescape $_ }'\'
 

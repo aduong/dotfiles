@@ -4,10 +4,6 @@
 ;;; "Brevity is the soul of wit" <foo at acm.org>
 (defalias 'perl-mode 'cperl-mode)
 
-;;; use tt-mode when file ends in .tt or .tt2
-(autoload 'tt-mode "tt-mode" "Template toolkit editing mode." t)
-(add-to-list 'auto-mode-alist '("\.tt2?$" . tt-mode))
-
 (add-hook 'cperl-mode-hook 'hs-minor-mode)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
@@ -16,6 +12,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector ["#002b36" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#839496"])
  '(c-basic-offset 4)
  '(column-number-mode t)
  '(cperl-close-paren-offset -4)
@@ -25,8 +22,12 @@
  '(cperl-indent-parens-as-block t)
  '(cperl-merge-trailing-else nil)
  '(css-indent-offset 2)
+ '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(ecb-options-version "2.40")
+ '(fci-rule-color "#073642")
  '(fill-column 80)
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-tail-colors (quote (("#073642" . 0) ("#546E00" . 20) ("#00736F" . 30) ("#00629D" . 50) ("#7B6000" . 60) ("#8B2C02" . 70) ("#93115C" . 85) ("#073642" . 100))))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-buffer-choice nil)
@@ -38,8 +39,12 @@
  '(tab-width 4)
  '(tool-bar-mode nil)
  '(truncate-line 1)
- '(truncate-lines t))
+ '(truncate-lines t)
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map (quote ((20 . "#dc322f") (40 . "#CF4F1F") (60 . "#C26C0F") (80 . "#b58900") (100 . "#AB8C00") (120 . "#A18F00") (140 . "#989200") (160 . "#8E9500") (180 . "#859900") (200 . "#729A1E") (220 . "#609C3C") (240 . "#4E9D5B") (260 . "#3C9F79") (280 . "#2aa198") (300 . "#299BA6") (320 . "#2896B5") (340 . "#2790C3") (360 . "#268bd2"))))
+ '(vc-annotate-very-old-color nil))
 
+;;; allow up-casing and down-casing region
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
@@ -51,18 +56,12 @@
    kept-new-versions 6
    kept-old-versions 2
    version-control t)       ; use versioned backups
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 1 :width normal :foundry "default" :family "default"))))
- '(cperl-array-face ((t (:foreground "yellow" :weight bold))))
- '(cperl-hash-face ((((class color) (background dark)) (:foreground "#AA0000" :weight bold)))))
 
+;;; load up scala-mode
 (add-to-list 'load-path "~/.emacs.d/site/scala-mode2/")
 (require 'scala-mode2)
 
+;;; setup ido and find file from TAGS
 (require 'ido)
 (ido-mode 1)
 (ido-everywhere 1)
@@ -79,19 +78,34 @@
        "Project file: " (tags-table-files) nil t)))))
 (global-set-key "\C-xt" 'ido-find-file-in-tag-files)
 
+;;; setup finding recent files
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-items 5000)
 (global-set-key "\C-x\C-r" 'recentf-open-files)
 
+;;; setup smart tabs
 (require 'smart-tab)
 (global-smart-tab-mode 1)
 
-(global-unset-key "\C-c\C-c")
-(global-set-key "\C-c\C-c" 'comment-or-uncomment-region)
-
+;;; setup elpa
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
   )
+
+(load-theme 'solarized-dark t)
+
+;;; bind C-shift-[xcv] to clipboard operations
+(global-set-key (kbd "C-S-x") 'clipboard-kill-region)
+(global-set-key (kbd "C-S-c") 'clipboard-kill-ring-save)
+(global-set-key (kbd "C-S-v") 'clipboard-yank)
+(global-set-key (kbd "C-c r") 'replace-string)
+(global-set-key (kbd "C-c R") 'replace-regexp)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
