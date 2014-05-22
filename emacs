@@ -25,10 +25,11 @@
  '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(ecb-options-version "2.40")
  '(fci-rule-color "#073642")
- '(fill-column 80)
+ '(fill-column 100)
+ '(haskell-mode-hook (quote (turn-on-haskell-indent ignore)))
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-tail-colors (quote (("#073642" . 0) ("#546E00" . 20) ("#00736F" . 30) ("#00629D" . 50) ("#7B6000" . 60) ("#8B2C02" . 70) ("#93115C" . 85) ("#073642" . 100))))
- '(indent-tabs-mode nil)
+ '(indent-tabs-mode t)
  '(inhibit-startup-screen t)
  '(initial-buffer-choice nil)
  '(js-indent-level 2)
@@ -57,6 +58,13 @@
    kept-old-versions 2
    version-control t)       ; use versioned backups
 
+;;; setup elpa
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  )
+
 ;;; load up scala-mode
 (add-to-list 'load-path "~/.emacs.d/site/scala-mode2/")
 (require 'scala-mode2)
@@ -84,16 +92,16 @@
 (setq recentf-max-menu-items 5000)
 (global-set-key "\C-x\C-r" 'recentf-open-files)
 
-;;; setup smart tabs
+;;; setup smart tab (auto-complete vs indent)
 (require 'smart-tab)
 (global-smart-tab-mode 1)
 
-;;; setup elpa
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  )
+;;; setup smart tabs (mix tabs & spaces)
+(require 'smart-tabs-mode)
+(smart-tabs-insinuate 'c 'java 'javascript)
+
+;; setup ESS (r-mode and such)
+(require 'ess-site)
 
 (load-theme 'solarized-dark t)
 
