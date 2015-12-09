@@ -6,8 +6,9 @@
 [ -z "$PS1" ] && return
 
 # don't put duplicate lines or lines starting with space in the history.
+# also, erase duplicates
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth:erasedups
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -34,7 +35,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+    xterm-*color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -62,11 +63,12 @@ unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
+    xterm*|rxvt*)
+        ps1_without_title="$PS1"
+        PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$ps1_without_title"
+        ;;
+    *)
+        ;;
 esac
 
 # enable color support of ls and also add handy aliases
@@ -109,15 +111,28 @@ fi
 # point to local TeX libraries
 export TEXMFHOME="$HOME/.local/share/texmf"
 
-export PATH="$HOME/.local/script:$PATH"
-
 # point to local R libraries
 export R_LIBS="$HOME/.local/lib/R"
 
 # setup local::lib for perl
-eval $(perl -I$HOME/.local/lib/perl5 -Mlocal::lib=$HOME/.local)
+[ $SHLVL -eq 1 ] && eval "$(perl -I$HOME/perl/lib/perl5 -Mlocal::lib=~/perl)"
 
 # enable autojump
 test -e /usr/share/autojump/autojump.bash && . /usr/share/autojump/autojump.bash
 
 export EDITOR='emacsclient'
+
+bind '"\e[Z":menu-complete'
+
+export LD_LIBRARY_PATH=/usr/local/lib
+
+title () {
+    _title="$1"
+
+    if [ -n "$ps1_without_title" ]; then
+        PS1="$ps1_without_title"
+        echo -ne "\033]0;${_title}\007"
+    else
+        echo 'Cannot set title. $ps1_without_title unset.'
+    fi
+}
