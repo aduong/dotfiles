@@ -111,6 +111,13 @@ fi
 # point to local TeX libraries
 export TEXMFHOME="$HOME/.local/share/texmf"
 
+mybatis_path="$HOME/opt/mybatis-migrations-3.1.0/bin/"
+es_path="$HOME/opt/elasticsearch/bin"
+arc_path="$HOME/opt/arcanist/bin"
+activator_path="$HOME/opt/activator-1.3.2"
+maven_path="$HOME/opt/apache-maven-3.3.3/bin/"
+export PATH="$maven_path:$activator_path:$mybatis_path:$arc_path:$es_path:$HOME/.local/bin:$PATH"
+
 # point to local R libraries
 export R_LIBS="$HOME/.local/lib/R"
 
@@ -121,10 +128,15 @@ export R_LIBS="$HOME/.local/lib/R"
 test -e /usr/share/autojump/autojump.bash && . /usr/share/autojump/autojump.bash
 
 export EDITOR='emacsclient'
+export MAVEN_OPTS='-Xmx2048m -Xverify:none -Dscala.useZincServer=true'
 
 bind '"\e[Z":menu-complete'
 
 export LD_LIBRARY_PATH=/usr/local/lib
+
+if [ -f ~/.bash_dev_aliases ]; then
+    . ~/.bash_dev_aliases
+fi
 
 title () {
     _title="$1"
