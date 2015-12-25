@@ -20,7 +20,6 @@ Config { font = "xft:Ubuntu:size=10"
                                   "-H", "70", "--high", "red"] 20
                     , Run Swap ["-H", "0", "--high", "red", "-p", "3"] 20
                     , Run Date "%a %_d %b %Y %H:%M:%S" "date" 10
-                    , Run Brightness ["-t", "Bright: <percent>%"] 10
                     , Run BatteryP ["BAT0"]
                               ["-t", "Batt: <acstatus>",
                                "-L", "10", "-H", "80", "--low", "red", "-p", "3",
