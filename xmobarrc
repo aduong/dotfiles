@@ -30,7 +30,8 @@ Config { font = "xft:Ubuntu:size=10"
                                "-o", "<left>%/<timeleft>",
                                "-f", "ADP0/online"
                                ] 50
-                    , Run Wireless "wlan0" ["-t", "<essid> <qualitybar>"] 50
+                    , Run Wireless "wlan0" [ "-t", "<essid> <qualitybar>"
+                                           , "-L", "50", "--low", "red"] 50
                     , Run StdinReader
                     ]
        , sepChar = "%"
