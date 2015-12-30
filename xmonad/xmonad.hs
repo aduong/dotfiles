@@ -1,14 +1,16 @@
+import Data.Functor((<$>))
+import Data.List(intercalate)
+import qualified XMonad.StackSet as W
+import System.IO(Handle)
 import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
+import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig
-import qualified XMonad.StackSet as W
 import XMonad.Util.Run
-import System.IO(Handle)
-import Data.Functor((<$>))
-import Data.List(intercalate)
 
 mkTempDir :: String -> IO String
 mkTempDir template = rstrip <$> runProcessWithInput "mktemp" ["--directory", template] ""
@@ -71,8 +73,9 @@ main = do
 
   xmonad $ defaultConfig
        { modMask = mod4Mask
-       , manageHook = manageDocks <+> manageHook defaultConfig
-       , layoutHook = smartBorders $ avoidStruts $ layoutHook defaultConfig
+       , manageHook = fullscreenManageHook <+> manageDocks <+> manageHook defaultConfig
+       , layoutHook = fullscreenFull $ smartBorders $ avoidStruts $ layoutHook defaultConfig
+       , handleEventHook = fullscreenEventHook
        , logHook = dynamicLogWithPP xmobarPP
                    { ppOutput = hPutStrLn xmobarProc
                    , ppLayout = const ""
