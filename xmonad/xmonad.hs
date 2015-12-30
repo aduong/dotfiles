@@ -60,6 +60,19 @@ setupXMobar = do
 
   return (xmproc, paCmd volumePipe, backlightCmd brightPipe)
 
+sleep :: MonadIO m => m ()
+sleep = safeSpawn "/usr/bin/dbus-send"
+        ["--system"
+        , "--print-reply"
+        , "--dest=org.freedesktop.login1"
+        , "/org/freedesktop/login1"
+        , "org.freedesktop.login1.Manager.Suspend"
+        , "boolean:true"
+        ]
+
+lockScreen :: MonadIO m => m ()
+lockScreen = safeSpawn "/usr/bin/gnome-screensaver-command" ["--lock"]
+
 mediaCmd :: MonadIO m => String ->  m ()
 mediaCmd cmd = safeSpawn "/usr/bin/dbus-send"
                [ "--print-reply"
@@ -86,13 +99,13 @@ main = do
        [ ("M1-<Tab>", windows W.focusDown)
        , ("M1-S-<Tab>", windows W.focusUp)
        , ("M1-<F4>", kill)
-       , ("M-S-l", safeSpawn "/usr/bin/gnome-screensaver-command" ["--lock"])
+       , ("M-S-l", lockScreen)
        , ("M-p", spawn "$(yeganesh -x)")
        , ("M-<Left>", prevWS)
        , ("M-<Right>", nextWS)
        , ("M-S-<Left>", shiftToPrev >> prevWS)
        , ("M-S-<Right>", shiftToNext >> nextWS)
-       , ("<XF86Sleep>", safeSpawn "/usr/bin/dbus-send" ["--system", "--print-reply", "--dest=org.freedesktop.login1", "/org/freedesktop/login1", "org.freedesktop.login1.Manager.Suspend", "boolean:true"])
+       , ("<XF86Sleep>", lockScreen >> sleep)
        , ("<XF86AudioMute>", volumeCmd "toggle")
        , ("<XF86AudioRaiseVolume>", volumeCmd "increase")
        , ("<XF86AudioLowerVolume>", volumeCmd "decrease")
