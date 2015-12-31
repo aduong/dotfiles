@@ -8,6 +8,7 @@ import XMonad.Hooks.SetWMName
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.FadeInactive
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig
@@ -89,9 +90,9 @@ main = do
        { modMask = mod4Mask
        , startupHook = setWMName "LG3D"
        , manageHook = fullscreenManageHook <+> manageDocks <+> manageHook defaultConfig
-       , layoutHook = fullscreenFull $ smartBorders $ avoidStruts $ layoutHook defaultConfig
+       , layoutHook = noBorders $ fullscreenFull $ avoidStruts $ layoutHook defaultConfig
        , handleEventHook = fullscreenEventHook
-       , logHook = dynamicLogWithPP xmobarPP
+       , logHook = fadeInactiveLogHook 0.8 >> dynamicLogWithPP xmobarPP
                    { ppOutput = hPutStrLn xmobarProc
                    , ppLayout = const ""
                    , ppTitle = xmobarColor "orange" "" . shorten 50
