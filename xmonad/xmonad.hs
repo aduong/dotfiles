@@ -4,6 +4,7 @@ import qualified XMonad.StackSet as W
 import System.IO(Handle)
 import XMonad
 import XMonad.Actions.CycleWS
+import XMonad.Hooks.SetWMName
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -86,6 +87,7 @@ main = do
 
   xmonad $ defaultConfig
        { modMask = mod4Mask
+       , startupHook = setWMName "LG3D"
        , manageHook = fullscreenManageHook <+> manageDocks <+> manageHook defaultConfig
        , layoutHook = fullscreenFull $ smartBorders $ avoidStruts $ layoutHook defaultConfig
        , handleEventHook = fullscreenEventHook
