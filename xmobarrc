@@ -1,0 +1,45 @@
+Config { font = "xft:Ubuntu Mono:size=10"
+       , additionalFonts = []
+       , borderColor = "black"
+       , border = TopB
+       , bgColor = "black"
+       , fgColor = "grey"
+       , alpha = 255
+       , position = Top
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [ Run Cpu ["-H","50", "--high","red", "-p", "3"] 20
+                    , Run Memory ["-t","Mem: <usedratio>%", "-p", "3",
+                                  "-H", "70", "--high", "red"] 20
+                    , Run Swap ["-H", "0", "--high", "red", "-p", "3"] 20
+                    , Run Date "%a %_d %b %Y %H:%M:%S" "date" 10
+                    , Run BatteryP ["BAT0"]
+                              ["-t", "Batt: <acstatus>",
+                               "-L", "10", "-H", "80", "--low", "red", "-p", "3",
+                               "--",
+                               "-O", "<fc=#09f><left>%</fc>",
+                               "-i", "<left>%",
+                               "-o", "<left>%/<timeleft>",
+                               "-f", "ADP0/online"
+                               ] 50
+                    , Run Wireless "wlan0" [ "-t", "<essid> <qualitybar>"
+                                           , "-L", "50", "--low", "red"] 50
+                    , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "<action=`gnome-system-monitor`>%cpu% | %memory% | %swap%</action> \
+                     \} %StdinReader% { \
+                     \<action=`x-terminal-emulator -e wicd-curses`>%wlan0wi%</action> | \
+                     \<action=`pavucontrol` button=1><action=`xdotool key XF86AudioRaiseVolume` button=4><action=`xdotool key XF86AudioLowerVolume` button=5>Vol: %VolumePipe%</action></action></action> | \
+                     \<action=`xdotool key XF86MonBrightnessUp` button=4><action=`xdotool key XF86MonBrightnessDown` button=5>Bright: %BrightPipe%</action></action> | \
+                     \<action=`gnome-power-statistics`>%battery%</action> | \
+                     \%date%"
+       }
