@@ -114,9 +114,6 @@ export TEXMFHOME="$HOME/.local/share/texmf"
 # point to local R libraries
 export R_LIBS="$HOME/.local/lib/R"
 
-# setup local::lib for perl
-[ $SHLVL -eq 1 ] && eval "$(perl -I$HOME/perl/lib/perl5 -Mlocal::lib=~/perl)"
-
 # enable autojump
 test -e /usr/share/autojump/autojump.bash && . /usr/share/autojump/autojump.bash
 
