@@ -43,3 +43,5 @@ alias cbpaste='xsel --clipboard -o'
 
 test -s ~/.xfce_aliases && . ~/.xfce_aliases
 test -s ~/.mac_aliases && . ~/.mac_aliases
+
+alias ec='emacsclient'
