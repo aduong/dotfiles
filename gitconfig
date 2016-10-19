@@ -2,12 +2,13 @@
 	name = Adrian Duong
 	email = adrian.duong@gmail.com
 [core]
-	editor = emacsclient
-	pager = less --ignore-case --chop-long-lines --RAW-CONTROL-CHARS
+	editor = emacsclient -c
+	pager = diff-so-fancy | less --ignore-case --chop-long-lines --RAW-CONTROL-CHARS
 [color]
 	ui = true
 [merge]
 	tool = ediff
+	defaultToUpstream = true
 [mergetool.ediff]
 	cmd = emacs --eval \"(progn (defun ediff-write-merge-buffer () (let ((file ediff-merge-store-file)) (set-buffer ediff-buffer-C) (write-region (point-min) (point-max) file) (message \\\"Merge buffer saved in: %s\\\" file) (set-buffer-modified-p nil) (sit-for 1))) (setq ediff-quit-hook 'kill-emacs ediff-quit-merge-hook 'ediff-write-merge-buffer) (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\"))\"
 [grep]
@@ -18,7 +19,16 @@
 	pop = stash pop
 	root = rev-parse --show-toplevel
 	sm = submodule
+	tree = log --graph --decorate --oneline
+	shove = push --force-with-lease
+	reseth = reset --hard
+	mergeff = merge --ff-only
+	delete = "!f () { git push origin :\"$1\" && git branch -D \"$1\"; }; f"
+	lg0 = log --format='%h	%an	 %ai	%s'
+	curbranch = rev-parse --abbrev-ref HEAD
 [push]
 	default = simple
 [diff]
 	renames = copies
+[pull]
+	ff = only
