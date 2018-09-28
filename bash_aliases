@@ -22,7 +22,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias -- -='cd -'
 
-alias less='less -iS'   # case insensitive less, chop long lines
+alias less='less -iSR'  # case insensitive less, chop long lines, display raw ANSI colour
 alias bc='bc -lq'       # arbitrary precision calculator
 alias igrep="grep -i"   # case insensitive grep
 alias egrep="grep -E"   # extended regex grep
