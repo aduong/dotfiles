@@ -32,7 +32,6 @@ alias rm="rm -I"        # safe rm
 
 alias sl='sl -e'
 
-alias json='python -mjson.tool'
 alias server='python -mSimpleHTTPServer'
 alias uri-escape='perl -MURI::Escape -E '\''foreach (@ARGV) { say uri_escape $_ }'\'
 alias uri-unescape='perl -MURI::Escape -E '\''foreach (@ARGV) { say uri_unescape $_ }'\'
