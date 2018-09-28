@@ -19,6 +19,7 @@ fi
 # movement aliases
 alias ..='cd ..'
 alias ...='cd ../..'
+alias ....='cd ../../..'
 alias -- -='cd -'
 
 alias less='less -iS'   # case insensitive less, chop long lines
