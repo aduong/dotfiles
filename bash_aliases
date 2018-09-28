@@ -8,8 +8,6 @@ alias l='ls -C --classify'
 if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 	alias ls='ls --color=auto'
-	#alias dir='dir --color=auto'
-	#alias vdir='vdir --color=auto'
 
 	alias grep='grep --color=auto'
 	alias fgrep='fgrep --color=auto'
@@ -42,6 +40,5 @@ alias cbcopy='xsel --clipboard -i'
 alias cbpaste='xsel --clipboard -o'
 
 test -s ~/.xfce_aliases && . ~/.xfce_aliases
-test -s ~/.mac_aliases && . ~/.mac_aliases
 
 alias ec='emacsclient'
