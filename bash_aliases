@@ -32,8 +32,6 @@ alias rm="rm -I"        # safe rm
 
 alias sl='sl -e'
 
-# alias reset-xfce4-volumed="pkill xfce4-volumed && xfce4-volumed"
-
 alias json='python -mjson.tool'
 alias server='python -mSimpleHTTPServer'
 alias uri-escape='perl -MURI::Escape -E '\''foreach (@ARGV) { say uri_escape $_ }'\'
