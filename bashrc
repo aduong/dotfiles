@@ -83,3 +83,9 @@ export LD_LIBRARY_PATH=/usr/local/lib
 if [ -d ~/.local/bin ]; then
 	export PATH="$HOME/.local/bin:$PATH"
 fi
+
+# This bashrc is a machine-independent one.
+# If there's a more local one, let's source it.
+if [ -f ~/.bashrc.local ]; then
+	. ~/.bashrc.local
+fi
