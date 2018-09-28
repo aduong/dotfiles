@@ -122,14 +122,3 @@ export EDITOR='emacsclient'
 bind '"\e[Z":menu-complete'
 
 export LD_LIBRARY_PATH=/usr/local/lib
-
-title () {
-    _title="$1"
-
-    if [ -n "$ps1_without_title" ]; then
-        PS1="$ps1_without_title"
-        echo -ne "\033]0;${_title}\007"
-    else
-        echo 'Cannot set title. $ps1_without_title unset.'
-    fi
-}
