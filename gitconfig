@@ -24,7 +24,6 @@
 	reseth = reset --hard
 	mergeff = merge --ff-only
 	delete = "!f () { git push origin :\"$1\" && git branch -D \"$1\"; }; f"
-	format = "!f () { git status --porcelain | grep -E  '^(M.|.M|A ).*\\.java' | cut -c4- | ( root=\"$(git root)\"; while read line; do echo \"$root/$line\"; done; ) | xargs -r java -jar ~/.local/lib/google-java-format.jar -r; }; f"
 	lg0 = log --format='%h	%an	 %ai	%s'
 	curbranch = rev-parse --abbrev-ref HEAD
 [push]
