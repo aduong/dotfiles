@@ -3,7 +3,7 @@
 	email = adrian.duong@gmail.com
 [core]
 	editor = emacsclient -c
-	pager = diff-so-fancy | less --ignore-case --chop-long-lines --RAW-CONTROL-CHARS
+	pager = diff-so-fancy | less --tabs=4 -iSRFX
 [color]
 	ui = true
 [merge]
@@ -26,9 +26,16 @@
 	delete = "!f () { git push origin :\"$1\" && git branch -D \"$1\"; }; f"
 	lg0 = log --format='%h	%an	 %ai	%s'
 	curbranch = rev-parse --abbrev-ref HEAD
+	ls = "!f () { git status --porcelain | grep -E  '^(M.|.M|A |R.).*\\.go' | cut -c4- | ( root=\"$(git root)\"; while IFS= read line; do rel=$(echo "$line" | perl -pe 's/.* -> //'); echo \"$root/$rel\"; done; ) ; }; f"
+	goimports = "!f () { r=\"$(git root)\"; mod=$(test -e \"$r/go.mod\" && head -1 \"$r/go.mod\" | cut -c8- || echo \"${r#$GOPATH/src/}\");  git ls | xargs -r goimports -local \"$mod\" -w ; }; f"
+	rev = rev-parse HEAD
+	revs = rev-parse --short HEAD
+	push-new = "!f () { git push -u origin \"$(git curbranch)\" ; }; f"
 [push]
 	default = simple
 [diff]
 	renames = copies
 [pull]
 	ff = only
+[rebase]
+	autoSquash = true
