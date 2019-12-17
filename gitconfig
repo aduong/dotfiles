@@ -3,7 +3,7 @@
 	email = adrian.duong@gmail.com
 [core]
 	editor = emacsclient -c
-	pager = diff-so-fancy | less --tabs=4 -iSRFX
+	pager = diff-so-fancy | less --ignore-case --chop-long-lines --RAW-CONTROL-CHARS
 [color]
 	ui = true
 [merge]
