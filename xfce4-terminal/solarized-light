@@ -31,4 +31,9 @@ MiscSlimTabs=FALSE
 MiscNewTabAdjacent=FALSE
 ScrollingOnOutput=FALSE
 ScrollingLines=10000
+MiscSearchDialogOpacity=100
+MiscShowUnsafePasteDialog=TRUE
+ShortcutsNoMenukey=TRUE
+ShortcutsNoMnemonics=TRUE
+ShortcutsNoHelpkey=TRUE
 
