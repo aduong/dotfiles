@@ -116,6 +116,4 @@
 (global-set-key (kbd "C-c r") 'replace-string)
 (global-set-key (kbd "C-c R") 'replace-regexp)
 
-(set-frame-font "DejaVu Sans Mono-12")
-(set-face-attribute 'default t :font "DejaVu Sans Mono-12")
 (set-default-font "DejaVu Sans Mono-12")
