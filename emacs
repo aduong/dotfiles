@@ -115,9 +115,7 @@
 (global-set-key (kbd "C-S-v") 'clipboard-yank)
 (global-set-key (kbd "C-c r") 'replace-string)
 (global-set-key (kbd "C-c R") 'replace-regexp)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+(set-frame-font "DejaVu Sans Mono-12")
+(set-face-attribute 'default t :font "DejaVu Sans Mono-12")
+(set-default-font "DejaVu Sans Mono-12")
