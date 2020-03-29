@@ -226,6 +226,86 @@ install_sbt() {
   sudo apt-get install -y sbt
 }
 
+setup_dns() {
+  log 'setting up DNS (systemd-resolvd, dnsmasq, stubby)'
+  sudo apt-get install -y dnsmasq stubby
+
+  log 'stopping systemd, dnsmasq, stubby'
+  sudo systemctl stop systemd-resolved.service
+  sudo systemctl stop dnsmasq.service
+  sudo systemctl stop stubby.service
+
+  local stubby_port=5353
+
+  # configure stubby
+  sudo cp /etc/stubby/stubby.yml{,.bak}
+  sudo tee /etc/stubby/stubby.yml > /dev/null <<EOF
+resolution_type: GETDNS_RESOLUTION_STUB
+dns_transport_list:
+  - GETDNS_TRANSPORT_TLS
+tls_authentication: GETDNS_AUTHENTICATION_REQUIRED
+tls_query_padding_blocksize: 128
+edns_client_subnet_private : 1
+round_robin_upstreams: 1
+idle_timeout: 10000
+listen_addresses:
+  - 127.0.0.1@$stubby_port
+  - 0::1@$stubby_port
+upstream_recursive_servers:
+- address_data: 1.1.1.1
+  tls_auth_name: "cloudflare-dns.com"
+- address_data: 1.0.0.1
+  tls_auth_name: "cloudflare-dns.com"
+- address_data: 2606:4700:4700::1111
+  tls_auth_name: "cloudflare-dns.com"
+- address_data: 2606:4700:4700::1001
+  tls_auth_name: "cloudflare-dns.com"
+EOF
+
+  # ensure stubby starts with -l for more visibility
+  sudo perl -i -pe 's{^(ExecStart=/usr/bin/stubby).*}{$1 -l}' \
+    /lib/systemd/system/stubby.service
+
+  sudo systemctl daemon-reload
+  log 'starting stubby'
+  sudo systemctl start stubby.service
+
+  # configure dnsmasq
+  sudo tee /etc/dnsmasq.d/stubby > /dev/null <<EOF
+no-resolv
+proxy-dnssec
+server=127.0.0.1#$stubby_port
+server=::1#$stubby_port
+listen-address=127.0.0.1
+listen-address=::1
+EOF
+
+  log 'starting dnsmasq'
+  sudo systemctl start dnsmasq.service
+
+  # configure systemd-resolved
+  sudo cp /etc/systemd/resolved.conf{,.bak}
+  sudo tee /etc/systemd/resolved.conf > /dev/null <<EOF
+DNS=127.0.0.1
+DNSSEC=yes
+EOF
+
+  # ensure systemd-resolved runs after dnsmasq
+  sudo mkdir -p /etc/systemd/system/dnsmasq.service.d
+  sudo tee /etc/systemd/system/dnsmasq.service.d/resolved-fix.conf > /dev/null <<EOF
+[Unit]
+After=dnsmasq.service
+
+[Service]
+ExecStartPre=/usr/bin/systemctl stop systemd-resolved.service
+ExecStartPost=/usr/bin/systemctl start systemd-resolved.service
+EOF
+
+  sudo systemctl daemon-reload
+  log 'starting systemd-resolved'
+  sudo systemctl start systemd-resolved.service
+}
+
 main() {
   sudo apt-get update
   sudo apt-get upgrade -y
@@ -255,6 +335,8 @@ main() {
   sudo snap install \
     spotify \
     && :
+
+  setup_dns
 
   setup_ssh
   setup_bash
