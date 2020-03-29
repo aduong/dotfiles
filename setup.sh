@@ -325,7 +325,6 @@ main() {
     powertop \
     python3-pip \
     redshift \
-    ripgrep \
     shellcheck \
     tlp \
     xmonad \
@@ -333,6 +332,7 @@ main() {
     && :
 
   sudo snap install \
+    ripgrep \
     spotify \
     && :
 
