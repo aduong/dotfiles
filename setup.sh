@@ -210,7 +210,12 @@ setup_gpg() {
 
 setup_inotify() {
   log 'setting up inotify limits'
-  sudo tee -a /etc/sysctl.d/local.conf > /dev/null <<< 'fs.inotify.max_user_watches = 524288'
+  local conf_file=/etc/sysctl.d/local.conf
+  if grep -F fs.inotify.max_user_watches "$conf_file"; then
+    sudo perl -i -pe 's/(fs.inotify.max_user_watches)\s*=\s*\d+/$1 = 524288/' "$conf_file"
+  else
+    sudo tee -a /etc/sysctl.d/local.conf > /dev/null <<< 'fs.inotify.max_user_watches = 524288'
+  fi
   sudo sysctl -p --system
 }
 
@@ -220,7 +225,7 @@ install_shfmt() {
 }
 
 install_sbt() {
-  sudo tee -a /etc/apt/sources.list.d/sbt.list <<< 'deb https://dl.bintray.com/sbt/debian /'
+  sudo tee /etc/apt/sources.list.d/sbt.list <<< 'deb https://dl.bintray.com/sbt/debian /'
   curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | sudo apt-key add
   sudo apt-get update
   sudo apt-get install -y sbt
