@@ -291,8 +291,10 @@ EOF
   # configure systemd-resolved
   sudo cp /etc/systemd/resolved.conf{,.bak}
   sudo tee /etc/systemd/resolved.conf > /dev/null <<EOF
+[Resolve]
 DNS=127.0.0.1
 DNSSEC=yes
+Domains=~.
 EOF
 
   # ensure systemd-resolved runs after dnsmasq
