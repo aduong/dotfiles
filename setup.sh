@@ -283,6 +283,7 @@ server=127.0.0.1#$stubby_port
 server=::1#$stubby_port
 listen-address=127.0.0.1
 listen-address=::1
+cache-size=1000
 EOF
 
   log 'starting dnsmasq'
