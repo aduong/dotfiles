@@ -86,7 +86,7 @@ install_intellij() {
   version=$(curl --silent 'https://data.services.jetbrains.com/products/releases?code=IIU&type=release&latest=true' | jq -r '.IIU[0].version')
   install_dir=/opt/intellij/$version
   if [[ ! -e $install_dir ]]; then
-    log 'installing intellij'
+    log "installing intellij version $version"
     archive_path=$(mktemp -d)/ideaIU-$version
     curl -L -o "$archive_path" "https://download.jetbrains.com/idea/ideaIU-$version.tar.gz"
     sudo mkdir -p "$install_dir"
