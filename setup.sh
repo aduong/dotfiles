@@ -92,6 +92,7 @@ install_intellij() {
     sudo mkdir -p "$install_dir"
     sudo tar --strip-components=1 -C "$install_dir" -xf "$archive_path"
   fi
+  sudo ln -T -f -s "$install_dir" /opt/intellij/current
 }
 
 setup_xmonad() {
