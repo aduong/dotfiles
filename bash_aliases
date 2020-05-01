@@ -45,3 +45,5 @@ alias ec='emacsclient'
 
 alias utc='date --utc -Iseconds'
 alias trim='{ IFS= read -r; echo -n "$REPLY"; }'
+
+alias fzfcopy='fzf | trim | cbcopy'
