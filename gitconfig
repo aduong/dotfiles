@@ -14,23 +14,26 @@
 [grep]
 	lineNumber = 1
 [alias]
+	b = branch
 	co = checkout
-	st = status
-	pop = stash pop
-	root = rev-parse --show-toplevel
-	sm = submodule
-	tree = log --graph --decorate --oneline
-	shove = push --force-with-lease
-	reseth = reset --hard
-	mergeff = merge --ff-only
-	delete = "!f () { git push origin :\"$1\" && git branch -D \"$1\"; }; f"
-	lg0 = log --format='%h	%an	 %ai	%s'
+	cb = rev-parse --abbrev-ref HEAD
 	curbranch = rev-parse --abbrev-ref HEAD
-	ls = "!f () { git status --porcelain | grep -E  '^(M.|.M|A |R.).*\\.go' | cut -c4- | ( root=\"$(git root)\"; while IFS= read line; do rel=$(echo "$line" | perl -pe 's/.* -> //'); echo \"$root/$rel\"; done; ) ; }; f"
+	delete = "!f () { git push origin :\"$1\" && git branch -D \"$1\"; }; f"
 	goimports = "!f () { r=\"$(git root)\"; mod=$(test -e \"$r/go.mod\" && head -1 \"$r/go.mod\" | cut -c8- || echo \"${r#$GOPATH/src/}\");  git ls | xargs -r goimports -local \"$mod\" -w ; }; f"
+	lg0 = log --format='%h	%an	 %ai	%s'
+	ls = "!f () { git status --porcelain | grep -E  '^(M.|.M|A |R.).*\\.go' | cut -c4- | ( root=\"$(git root)\"; while IFS= read line; do rel=$(echo "$line" | perl -pe 's/.* -> //'); echo \"$root/$rel\"; done; ) ; }; f"
+	mergeff = merge --ff-only
+	pop = stash pop
+	push-new = "!f () { git push -u origin \"$(git curbranch)\" ; }; f"
+	reseth = reset --hard
 	rev = rev-parse HEAD
 	revs = rev-parse --short HEAD
-	push-new = "!f () { git push -u origin \"$(git curbranch)\" ; }; f"
+	root = rev-parse --show-toplevel
+	shove = push --force-with-lease
+	sign = commit --amend -C@ -S
+	sm = submodule
+	st = status
+	tree = log --graph --decorate --oneline
 [push]
 	default = simple
 [diff]
