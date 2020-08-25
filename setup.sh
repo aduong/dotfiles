@@ -43,17 +43,18 @@ EOF
 }
 
 install_go() {
-  local url go_version go_dir install_dir archive_path
+  local url url_path go_version go_dir install_dir archive_path
 
-  url=$(curl --silent https://golang.org/dl/ | grep -o -E 'https://[A-Za-z0-9/.]+\.linux-amd64\.tar\.gz' | head -1)
+  url_path=$(curl --silent https://golang.org/dl/ | grep -o -E '/dl/[A-Za-z0-9/.]+\.linux-amd64\.tar\.gz' | head -1)
+  url=https://golang.org${url_path}
   go_version=$(basename "$url" .linux-amd64.tar.gz)
   go_dir=/opt/go
   install_dir=$go_dir/$go_version
 
-  log 'installing go'
+  log "installing go to $install_dir"
   if [[ ! -e $install_dir ]]; then
     archive_path="$(mktemp -d)/$go_version.tar.gz"
-    curl -o "$archive_path" "$url"
+    curl -L -o "$archive_path" "$url"
     sudo mkdir -p "$install_dir"
     sudo tar --strip-components=1 -C "$install_dir" -xf "$archive_path"
   fi
