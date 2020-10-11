@@ -116,7 +116,7 @@ setup_bash() {
   if [[ ! -e ~/.bash_completion ]]; then
     local completion_dir=~/.bash_completion.d
     mkdir -p "$completion_dir"
-    cat > ~/.bash_completion <<EOF
+    cat > ~/.bash_completion << EOF
 #!/usr/bin/env bash
 
 shopt nullglob > /dev/null
@@ -142,7 +142,7 @@ setup_emacs() {
   # TODO: install emacs packages
   local desktop_file=~/.config/autostart/emacs\ server.desktop
   [[ -e $desktop_file ]] && return
-  cat > "$desktop_file" <<EOF
+  cat > "$desktop_file" << EOF
 [Desktop Entry]
 Encoding=UTF-8
 Version=0.9.4
@@ -179,7 +179,7 @@ setup_redshift() {
   local desktop_file=~/.config/autostart/redshift.desktop
   [[ -e $desktop_file ]] && return
   log 'setting up redshift'
-  cat > "$desktop_file" <<EOF
+  cat > "$desktop_file" << EOF
 [Desktop Entry]
 Encoding=UTF-8
 Version=0.9.4
@@ -246,7 +246,7 @@ setup_dns() {
 
   # configure stubby
   sudo cp /etc/stubby/stubby.yml{,.bak}
-  sudo tee /etc/stubby/stubby.yml > /dev/null <<EOF
+  sudo tee /etc/stubby/stubby.yml > /dev/null << EOF
 resolution_type: GETDNS_RESOLUTION_STUB
 dns_transport_list:
   - GETDNS_TRANSPORT_TLS
@@ -278,7 +278,7 @@ EOF
   sudo systemctl start stubby.service
 
   # configure dnsmasq
-  sudo tee /etc/dnsmasq.d/stubby > /dev/null <<EOF
+  sudo tee /etc/dnsmasq.d/stubby > /dev/null << EOF
 no-resolv
 proxy-dnssec
 server=127.0.0.1#$stubby_port
@@ -293,7 +293,7 @@ EOF
 
   # configure systemd-resolved
   sudo cp /etc/systemd/resolved.conf{,.bak}
-  sudo tee /etc/systemd/resolved.conf > /dev/null <<EOF
+  sudo tee /etc/systemd/resolved.conf > /dev/null << EOF
 [Resolve]
 DNS=127.0.0.1
 DNSSEC=yes
@@ -302,7 +302,7 @@ EOF
 
   # ensure systemd-resolved runs after dnsmasq
   sudo mkdir -p /etc/systemd/system/dnsmasq.service.d
-  sudo tee /etc/systemd/system/dnsmasq.service.d/resolved-fix.conf > /dev/null <<EOF
+  sudo tee /etc/systemd/system/dnsmasq.service.d/resolved-fix.conf > /dev/null << EOF
 [Unit]
 After=dnsmasq.service
 
