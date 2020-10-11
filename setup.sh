@@ -316,6 +316,14 @@ EOF
   sudo systemctl start systemd-resolved.service
 }
 
+install_nerd_fonts() {
+  local dejavu_path=/tmp/DejaVuSansMono.zip
+  curl -o "$dejavu_path" -C - -L https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/DejaVuSansMono.zip
+  sha512sum -c <<< "50b03224f43a319fe9db8a0845f5114811d8278b65d2ae1018f3529cad8ede1315438389ab132124b499ddbf779e0b4b195cef7e17dd0a3dc9c40657eed0ce1b  $dejavu_path"
+  sudo unzip -d /usr/local/share/fonts "$dejavu_path"
+  sudo fc-cache -v
+}
+
 main() {
   sudo apt-get update
   sudo apt-get upgrade -y
@@ -358,6 +366,7 @@ main() {
   install_go
   install_node
   install_intellij
+  install_nerd_fonts
 
   setup_git
   setup_redshift
