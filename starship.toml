@@ -83,7 +83,7 @@ disabled = true
 
 [jobs]
 threshold = 1
-format = "[$symbol$number]($style) " # default
+format = "(✦$number )"
 
 [julia]
 disabled = true
