@@ -324,6 +324,13 @@ install_nerd_fonts() {
   sudo fc-cache -v
 }
 
+install_rust() {
+  local rust_home=${1:-/opt/rust}
+  curl https://sh.rustup.rs -sSf \
+    | sudo env RUSTUP_HOME="$rust_home" CARGO_HOME="$rust_home" sh -s -- -y --no-modify-path
+  sudo ln -s /opt/rust/bin/* /usr/local/bin/
+}
+
 main() {
   sudo apt-get update
   sudo apt-get upgrade -y
@@ -353,6 +360,12 @@ main() {
     ripgrep \
     spotify \
     && :
+
+  local rust_home=/opt/rust
+  install_rust "$rust_home"
+  sudo env RUSTUP_HOME="$rust_home" CARGO_HOME="$rust_home" cargo install \
+    ripgrep \
+    && sudo ln -s -f "$rust_home"/bin/* /usr/local/bin/
 
   setup_dns
 
