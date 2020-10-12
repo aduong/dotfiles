@@ -344,6 +344,7 @@ main() {
     gnupg2 \
     htop \
     jq \
+    mosh \
     ntp \
     openjdk-8-jre \
     parallel \
