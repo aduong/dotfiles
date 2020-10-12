@@ -94,3 +94,5 @@ fi
 if [ -f ~/.bashrc.local ]; then
   . ~/.bashrc.local
 fi
+
+eval "$(starship init bash)"

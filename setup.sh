@@ -366,6 +366,7 @@ main() {
   install_rust "$rust_home"
   sudo env RUSTUP_HOME="$rust_home" CARGO_HOME="$rust_home" cargo install \
     ripgrep \
+    starship \
     && sudo ln -s -f "$rust_home"/bin/* /usr/local/bin/
 
   setup_dns

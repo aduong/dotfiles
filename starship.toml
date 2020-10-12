@@ -1,0 +1,138 @@
+add_newline = false
+
+format = """
+$username\
+$hostname\
+$shlvl\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$kubernetes\
+$memory_usage\
+$jobs\
+$cmd_duration\
+$custom\
+$status\
+$character"""
+
+[aws]
+disabled = true
+
+[battery]
+disabled = true
+
+[character]
+success_symbol = "[❯](green)" # default but not bold
+error_symbol = "[❯](red)" # default but not bold
+
+[cmake]
+disabled = true
+
+[cmd_duration]
+min_time = 2_000 # default
+show_milliseconds = true
+
+[conda]
+disabled = true
+
+[crystal]
+diabled = true
+
+[dart]
+disabled = true
+
+[directory]
+truncation_length = 0
+truncate_to_repo = true
+truncation_symbol = ".../"
+
+[docker_context]
+disabled = true
+
+[dotnet]
+disabled = true
+
+[elixir]
+disabled = true
+
+[elm]
+disabled = true
+
+[env_var]
+disabled = true
+
+[erlang]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[git_branch]
+format = "[$symbol$branch]($style) " # default but without the " on" prefix
+
+[golang]
+disabled = true
+
+[helm]
+disabled = true
+
+[java]
+disabled = true
+
+[jobs]
+threshold = 1
+format = "[$symbol$number]($style) " # default
+
+[julia]
+disabled = true
+
+[kubernetes]
+disabled = true
+format = "[$symbol$context( \\($namespace\\))]($style) " # default without " in" suffix
+
+[nim]
+disabled = true
+
+[nix_shell]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[package]
+disabled = true
+
+[purescript]
+disabled = true
+
+[ocaml]
+disabled = true
+
+[perl]
+disabled = true
+
+[php]
+disabled = true
+
+[python]
+disabled = true
+
+[ruby]
+disabled = true
+
+[rust]
+disabled = true
+
+[singularity]
+disabled = true
+
+[swift]
+disabled = true
+
+[terraform]
+disabled = true
+
+[zig]
+disabled = true
