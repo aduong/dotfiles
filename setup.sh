@@ -347,6 +347,7 @@ main() {
     gnupg2 \
     htop \
     jq \
+    libssl-dev \
     mosh \
     ntp \
     openjdk-8-jre \
