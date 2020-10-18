@@ -1,0 +1,34 @@
+# source any functions that are in .bash_functions.d
+for file in ~/.bash_functions.d/*; do
+  test -e "$file" || continue
+  . "$file"
+done
+
+BASH_LIBS=~/.local/lib/bash
+
+. "$BASH_LIBS/terminal.sh"
+
+# json functions
+
+json() {
+  jq . "$@"
+}
+
+# docker functions
+
+. "$BASH_LIBS/utils.sh"
+
+. "$BASH_LIBS/docker.sh"
+rename_func rm_dangling_volumes dkr_rm_dangling_volumes
+rename_func rm_exited_containers dkr_rm_exited_containers
+
+unset "${_util_funcs[@]}"
+unset _util_funcs
+
+# gcloud functions
+
+. "$BASH_LIBS/gcloud.sh"
+
+# openssl functions
+
+. "$BASH_LIBS/openssl.sh"

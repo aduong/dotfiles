@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# kube aliases
+alias k=kubectl
+alias kctl=kubectl
+alias kns=kubens
+alias kctx=kubectx
+
+alias shfmt='shfmt -i 2 -bn -ci'
+
+alias depensure='cd $(git rev-parse --show-toplevel) && dep ensure -v || { rm -rf ./vendor ./.vendor-new && dep ensure -v ; }'
+
+heroku_path=/opt/heroku/heroku/bin
+node_path=/opt/node/current/bin
+go_path=$HOME/go/bin:/opt/go/current/bin
+sbt_path=/opt/sbt/sbt/bin
+rust_path=~/.cargo/bin
+yarn_path=~/.yarn/bin
+yarn_global_path=~/.config/yarn/global/node_modules/.bin
+
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export GOROOT=/opt/go/current
+
+export LD_LIBRARY_PATH=/usr/local/lib
+export PATH="$yarn_path:$yarn_global_path:$rust_path:$go_path:$node_path:$heroku_path:$sbt_path:$PATH"
+
+export VAULT_ADDR='https://vault.render.com:8200'
+export VAULT_FORMAT=yaml
+
+ssl_get_cert() {
+  local host=$1
+  openssl s_client -connect $host:443 -servername $host < /dev/null 2>/dev/null \
+    | perl -ne 'if(/-BEGIN CERTIFICATE-/){$p=1} ; print if $p; if(/-END CERTIFICATE-/) {$p=0}' \
+    | openssl x509 -text -noout
+}
