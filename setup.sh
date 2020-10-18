@@ -278,6 +278,9 @@ EOF
   sudo systemctl start stubby.service
 
   # configure dnsmasq
+  sudo tee /etc/dnsmasq.d/systemd-resolved > /dev/null << EOF
+bind-interfaces
+EOF
   sudo tee /etc/dnsmasq.d/stubby > /dev/null << EOF
 no-resolv
 proxy-dnssec
