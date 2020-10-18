@@ -355,6 +355,7 @@ main() {
     powertop \
     python3-pip \
     redshift \
+    restic \
     shellcheck \
     tlp \
     xmonad \
