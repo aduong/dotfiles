@@ -89,6 +89,22 @@ if [ -d ~/.local/bin ]; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ -d /opt/go/current/bin ]; then
+  export PATH="/opt/go/current/bin:$PATH"
+fi
+
+if [ -d ~/go/bin ]; then
+  export PATH="$HOME/go/bin/:$PATH"
+fi
+
+if [ -d /opt/rust/bin ]; then
+  export PATH="/opt/rust/bin:$PATH"
+fi
+
+if [ -d ~/.cargo/bin ]; then
+  export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
 # This bashrc is a machine-independent one.
 # If there's a more local one, let's source it.
 if [ -f ~/.bashrc.local ]; then
