@@ -17,13 +17,14 @@ sbt_path=/opt/sbt/sbt/bin
 rust_path=~/.cargo/bin
 yarn_path=~/.yarn/bin
 yarn_global_path=~/.config/yarn/global/node_modules/.bin
+gcloud_path=/opt/google-cloud-sdk/bin
 
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export GOROOT=/opt/go/current
 
 export LD_LIBRARY_PATH=/usr/local/lib
-export PATH="$yarn_path:$yarn_global_path:$rust_path:$go_path:$node_path:$heroku_path:$sbt_path:$PATH"
+export PATH="$gcloud_path:$yarn_path:$yarn_global_path:$rust_path:$go_path:$node_path:$heroku_path:$sbt_path:$PATH"
 
 export VAULT_ADDR='https://vault.render.com:8200'
 export VAULT_FORMAT=yaml
