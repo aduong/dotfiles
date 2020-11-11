@@ -72,7 +72,7 @@ install_node() {
   install_dir=$node_dir/$node_version
 
   if [[ ! -e $install_dir ]]; then
-    log 'installing node'
+    log "installing node version $node_version"
     archive_path="$(mktemp -d)/$node_version.tar.xz"
     curl -o "$archive_path" "$url"
     sudo mkdir -p "$install_dir"
