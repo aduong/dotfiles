@@ -355,7 +355,6 @@ main() {
     powertop \
     python3-pip \
     redshift \
-    restic \
     shellcheck \
     tlp \
     xmonad \
@@ -374,6 +373,13 @@ main() {
     starship \
     && sudo ln -s -f "$rust_home"/bin/* /usr/local/bin/
 
+  install_go
+  local go_home=/opt/go
+  sudo mkdir -p "$go_home/bin" \
+    && sudo env GOBIN=/opt/go/bin GO111MODULE=on go get \
+    github.com/restic/restic/cmd/restic \
+    && sudo ln -s -f "$go_home"/bin/* /usr/local/bin/
+
   setup_dns
 
   setup_ssh
@@ -383,7 +389,6 @@ main() {
 
   install_keybase
   install_bitwarden
-  install_go
   install_node
   install_intellij
   install_nerd_fonts
