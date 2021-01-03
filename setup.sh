@@ -19,69 +19,6 @@ install_keybase() {
   sudo apt --fix-broken install -y
 }
 
-install_bitwarden() {
-  sudo mkdir -p /opt/bitwarden
-  local app_path=/opt/bitwarden/Bitwarden.AppImage
-  if [[ ! -f $app_path ]]; then
-    log 'installing bitwarden'
-    sudo curl -L -o "$app_path" 'https://vault.bitwarden.com/download/?app=desktop&platform=linux'
-    sudo chmod a+x "$app_path"
-  fi
-  mkdir -p ~/.local/share/applications
-  cat >~/.local/share/applications/bitwarden.desktop <<EOF
-[Desktop Entry]
-Name=Bitwarden
-Comment=A secure and free password manager for all of your devices.
-Exec="/opt/bitwarden/Bitwarden.AppImage" %U
-Terminal=false
-Type=Application
-Icon=appimagekit-bitwarden
-StartupWMClass=Bitwarden
-Categories=Utility;
-TryExec=/opt/bitwarden/Bitwarden.AppImage
-EOF
-}
-
-install_go() {
-  local url url_path go_version go_dir install_dir archive_path
-
-  url_path=$(curl --silent https://golang.org/dl/ | grep -o -E '/dl/[A-Za-z0-9/.]+\.linux-amd64\.tar\.gz' | head -1)
-  url=https://golang.org${url_path}
-  go_version=$(basename "$url" .linux-amd64.tar.gz)
-  go_dir=/opt/go
-  install_dir=$go_dir/$go_version
-
-  log "installing go to $install_dir"
-  if [[ ! -e $install_dir ]]; then
-    archive_path="$(mktemp -d)/$go_version.tar.gz"
-    curl -L -o "$archive_path" "$url"
-    sudo mkdir -p "$install_dir"
-    sudo tar --strip-components=1 -C "$install_dir" -xf "$archive_path"
-  fi
-  sudo ln -T -f -s "$install_dir" "$go_dir/current"
-  sudo ln -f -s "$install_dir/bin/"* /usr/local/bin/
-
-  go get -u golang.org/x/tools/cmd/goimports
-}
-
-install_node() {
-  local url node_version node_dir install_dir
-  url=$(curl --silent https://nodejs.org/en/download/ | grep -E -o 'https://nodejs.org/dist/v([0-9.]+)/node-v\1-linux-x64.tar.xz')
-  node_version=$(basename "$url" -linux-x64.tar.xz)
-  node_dir=/opt/node
-  install_dir=$node_dir/$node_version
-
-  if [[ ! -e $install_dir ]]; then
-    log "installing node version $node_version"
-    archive_path="$(mktemp -d)/$node_version.tar.xz"
-    curl -o "$archive_path" "$url"
-    sudo mkdir -p "$install_dir"
-    sudo tar --strip-components=1 -C "$install_dir" -xf "$archive_path"
-  fi
-  sudo ln -T -f -s "$install_dir" "$node_dir/current"
-  sudo ln -f -s "$install_dir/bin/"* /usr/local/bin/
-}
-
 install_intellij() {
   local version install_dir archive_path
   version=$(curl --silent 'https://data.services.jetbrains.com/products/releases?code=IIU&type=release&latest=true' | jq -r '.IIU[0].version')
@@ -221,11 +158,6 @@ setup_inotify() {
   sudo sysctl -p --system
 }
 
-install_shfmt() {
-  log 'installing shfmt'
-  GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
-}
-
 install_sbt() {
   sudo tee /etc/apt/sources.list.d/sbt.list <<<'deb https://dl.bintray.com/sbt/debian /'
   curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | sudo apt-key add
@@ -318,6 +250,7 @@ EOF
   sudo systemctl start systemd-resolved.service
 }
 
+
 install_nerd_fonts() {
   local dejavu_path=/tmp/DejaVuSansMono.zip
   curl -o "$dejavu_path" -C - -L https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/DejaVuSansMono.zip
@@ -326,59 +259,49 @@ install_nerd_fonts() {
   sudo fc-cache -v
 }
 
-install_rust() {
-  local rust_home=${1:-/opt/rust}
-  curl https://sh.rustup.rs -sSf \
-    | sudo env RUSTUP_HOME="$rust_home" CARGO_HOME="$rust_home" sh -s -- -y --no-modify-path
-  sudo ln -s /opt/rust/bin/* /usr/local/bin/
-}
+nix_install() {
+  if ! command -v nix-env; then
+    sh <(curl -L https://nixos.org/nix/install) --daemon
+  fi
 
-main() {
-  sudo apt-get update
-  sudo apt-get upgrade -y
-  sudo apt-get install -y \
+  nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+
+  nix-env -i \
     autojump \
-    chromium-browser \
+    bash_5 \
+    bitwarden \
+    chromium \
     curl \
+    docker \
     emacs \
     firefox \
     git \
-    gnupg2 \
+    gnupg \
+    gopls \
     htop \
+    iotop \
     jq \
-    libssl-dev \
-    mosh \
     ntp \
-    openjdk-8-jre \
-    parallel \
-    powertop \
-    python3-pip \
-    redshift \
-    shellcheck \
-    tlp \
-    xmonad \
-    xsel \
-    && :
-
-  sudo snap install \
-    spotify \
-    && :
-
-  local rust_home=/opt/rust
-  install_rust "$rust_home"
-  sudo env RUSTUP_HOME="$rust_home" CARGO_HOME="$rust_home" cargo install \
+    restic \
     ripgrep \
+    mosh \
+    nerdfonts \
+    nodejs-15_x \
+    openssh \
+    powertop \
+    redshift \
+    spotify \
     starship \
-    && sudo ln -s -f "$rust_home"/bin/* /usr/local/bin/
+    tlp \
+    xclip \
+    haskellPackages.xmonad \
+    && :
+}
 
-  install_go
-  local go_home=/opt/go
-  sudo mkdir -p "$go_home/bin" \
-    && sudo env GOBIN=/opt/go/bin GO111MODULE=on go get \
-      github.com/restic/restic/cmd/restic \
-      golang.org/x/tools/cmd/goimports \
-      golang.org/x/tools/gopls \
-    && sudo ln -s -f "$go_home"/bin/* /usr/local/bin/
+main() {
+  nix_install
+  sudo apt-get update
+  sudo apt-get upgrade -y
 
   setup_dns
 
@@ -388,22 +311,12 @@ main() {
   setup_emacs
 
   install_keybase
-  install_bitwarden
-  install_node
   install_intellij
-  install_nerd_fonts
 
   setup_git
   setup_redshift
   setup_xfce
   setup_inotify
-
-  install_shfmt
-  install_sbt
-
-  # TODO: docker
-  sudo apt-get install -y docker.io
-  sudo groupadd docker
 }
 
 if [[ $0 != bash ]]; then

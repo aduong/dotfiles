@@ -52,6 +52,10 @@ else
 fi
 unset color_prompt force_color_prompt
 
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+
 # Alias definitions.
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
@@ -76,7 +80,9 @@ export TEXMFHOME="$HOME/.local/share/texmf"
 export R_LIBS="$HOME/.local/lib/R"
 
 # enable autojump
-test -e /usr/share/autojump/autojump.bash && . /usr/share/autojump/autojump.bash
+if [ -e ~/.nix-profile/share/autojump/autojump.bash ]; then
+  . ~/.nix-profile/share/autojump/autojump.bash
+fi
 
 export EDITOR='emacsclient'
 
