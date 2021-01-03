@@ -378,6 +378,8 @@ main() {
   sudo mkdir -p "$go_home/bin" \
     && sudo env GOBIN=/opt/go/bin GO111MODULE=on go get \
     github.com/restic/restic/cmd/restic \
+    golang.org/x/tools/cmd/goimports \
+    golang.org/x/tools/gopls \
     && sudo ln -s -f "$go_home"/bin/* /usr/local/bin/
 
   setup_dns
