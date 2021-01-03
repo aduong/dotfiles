@@ -362,7 +362,6 @@ main() {
     && :
 
   sudo snap install \
-    ripgrep \
     spotify \
     && :
 
