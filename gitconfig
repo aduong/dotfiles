@@ -19,6 +19,7 @@
 	cb = rev-parse --abbrev-ref HEAD
 	curbranch = rev-parse --abbrev-ref HEAD
 	delete = "!f () { git push origin :\"$1\" && git branch -D \"$1\"; }; f"
+	fixup = commit --amend -C@
 	goimports = "!f () { r=\"$(git root)\"; mod=$(test -e \"$r/go.mod\" && head -1 \"$r/go.mod\" | cut -c8- || echo \"${r#$GOPATH/src/}\");  git ls | xargs -r goimports -local \"$mod\" -w ; }; f"
 	lg0 = log --format='%h	%an	 %ai	%s'
 	ls = "!f () { git status --porcelain | grep -E  '^(M.|.M|A |R.).*\\.go' | cut -c4- | ( root=\"$(git root)\"; while IFS= read line; do rel=$(echo "$line" | perl -pe 's/.* -> //'); echo \"$root/$rel\"; done; ) ; }; f"
