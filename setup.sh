@@ -28,7 +28,7 @@ install_bitwarden() {
     sudo chmod a+x "$app_path"
   fi
   mkdir -p ~/.local/share/applications
-  cat > ~/.local/share/applications/bitwarden.desktop << EOF
+  cat >~/.local/share/applications/bitwarden.desktop <<EOF
 [Desktop Entry]
 Name=Bitwarden
 Comment=A secure and free password manager for all of your devices.
@@ -116,7 +116,7 @@ setup_bash() {
   if [[ ! -e ~/.bash_completion ]]; then
     local completion_dir=~/.bash_completion.d
     mkdir -p "$completion_dir"
-    cat > ~/.bash_completion << EOF
+    cat >~/.bash_completion <<EOF
 #!/usr/bin/env bash
 
 shopt nullglob > /dev/null
@@ -142,7 +142,7 @@ setup_emacs() {
   # TODO: install emacs packages
   local desktop_file=~/.config/autostart/emacs\ server.desktop
   [[ -e $desktop_file ]] && return
-  cat > "$desktop_file" << EOF
+  cat >"$desktop_file" <<EOF
 [Desktop Entry]
 Encoding=UTF-8
 Version=0.9.4
@@ -179,7 +179,7 @@ setup_redshift() {
   local desktop_file=~/.config/autostart/redshift.desktop
   [[ -e $desktop_file ]] && return
   log 'setting up redshift'
-  cat > "$desktop_file" << EOF
+  cat >"$desktop_file" <<EOF
 [Desktop Entry]
 Encoding=UTF-8
 Version=0.9.4
@@ -216,7 +216,7 @@ setup_inotify() {
   if grep -F fs.inotify.max_user_watches "$conf_file"; then
     sudo perl -i -pe 's/(fs.inotify.max_user_watches)\s*=\s*\d+/$1 = 524288/' "$conf_file"
   else
-    sudo tee -a /etc/sysctl.d/local.conf > /dev/null <<< 'fs.inotify.max_user_watches = 524288'
+    sudo tee -a /etc/sysctl.d/local.conf >/dev/null <<<'fs.inotify.max_user_watches = 524288'
   fi
   sudo sysctl -p --system
 }
@@ -227,7 +227,7 @@ install_shfmt() {
 }
 
 install_sbt() {
-  sudo tee /etc/apt/sources.list.d/sbt.list <<< 'deb https://dl.bintray.com/sbt/debian /'
+  sudo tee /etc/apt/sources.list.d/sbt.list <<<'deb https://dl.bintray.com/sbt/debian /'
   curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | sudo apt-key add
   sudo apt-get update
   sudo apt-get install -y sbt
@@ -246,7 +246,7 @@ setup_dns() {
 
   # configure stubby
   sudo cp /etc/stubby/stubby.yml{,.bak}
-  sudo tee /etc/stubby/stubby.yml > /dev/null << EOF
+  sudo tee /etc/stubby/stubby.yml >/dev/null <<EOF
 resolution_type: GETDNS_RESOLUTION_STUB
 dns_transport_list:
   - GETDNS_TRANSPORT_TLS
@@ -278,10 +278,10 @@ EOF
   sudo systemctl start stubby.service
 
   # configure dnsmasq
-  sudo tee /etc/dnsmasq.d/systemd-resolved > /dev/null << EOF
+  sudo tee /etc/dnsmasq.d/systemd-resolved >/dev/null <<EOF
 bind-interfaces
 EOF
-  sudo tee /etc/dnsmasq.d/stubby > /dev/null << EOF
+  sudo tee /etc/dnsmasq.d/stubby >/dev/null <<EOF
 no-resolv
 proxy-dnssec
 server=127.0.0.1#$stubby_port
@@ -296,7 +296,7 @@ EOF
 
   # configure systemd-resolved
   sudo cp /etc/systemd/resolved.conf{,.bak}
-  sudo tee /etc/systemd/resolved.conf > /dev/null << EOF
+  sudo tee /etc/systemd/resolved.conf >/dev/null <<EOF
 [Resolve]
 DNS=127.0.0.1
 DNSSEC=yes
@@ -305,7 +305,7 @@ EOF
 
   # ensure systemd-resolved runs after dnsmasq
   sudo mkdir -p /etc/systemd/system/dnsmasq.service.d
-  sudo tee /etc/systemd/system/dnsmasq.service.d/resolved-fix.conf > /dev/null << EOF
+  sudo tee /etc/systemd/system/dnsmasq.service.d/resolved-fix.conf >/dev/null <<EOF
 [Unit]
 After=dnsmasq.service
 
@@ -322,7 +322,7 @@ EOF
 install_nerd_fonts() {
   local dejavu_path=/tmp/DejaVuSansMono.zip
   curl -o "$dejavu_path" -C - -L https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/DejaVuSansMono.zip
-  sha512sum -c <<< "50b03224f43a319fe9db8a0845f5114811d8278b65d2ae1018f3529cad8ede1315438389ab132124b499ddbf779e0b4b195cef7e17dd0a3dc9c40657eed0ce1b  $dejavu_path"
+  sha512sum -c <<<"50b03224f43a319fe9db8a0845f5114811d8278b65d2ae1018f3529cad8ede1315438389ab132124b499ddbf779e0b4b195cef7e17dd0a3dc9c40657eed0ce1b  $dejavu_path"
   sudo unzip -d /usr/local/share/fonts "$dejavu_path"
   sudo fc-cache -v
 }
@@ -376,9 +376,9 @@ main() {
   local go_home=/opt/go
   sudo mkdir -p "$go_home/bin" \
     && sudo env GOBIN=/opt/go/bin GO111MODULE=on go get \
-    github.com/restic/restic/cmd/restic \
-    golang.org/x/tools/cmd/goimports \
-    golang.org/x/tools/gopls \
+      github.com/restic/restic/cmd/restic \
+      golang.org/x/tools/cmd/goimports \
+      golang.org/x/tools/gopls \
     && sudo ln -s -f "$go_home"/bin/* /usr/local/bin/
 
   setup_dns
