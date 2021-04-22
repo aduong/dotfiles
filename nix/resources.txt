@@ -1,0 +1,4 @@
+- https://nixos.wiki/wiki/Full_Disk_Encryption
+- https://github.com/NixOS/nixpkgs/issues/24386
+- https://wiki.archlinux.org/index.php/dm-crypt/Device_encryption
+- https://gist.github.com/ladinu/bfebdd90a5afd45dec811296016b2a3f
