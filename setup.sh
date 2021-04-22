@@ -267,34 +267,47 @@ nix_install() {
   nix-channel --add https://nixos.org/channels/nixpkgs-unstable
 
   nix-env -i \
-    autojump \
-    bash_5 \
     bitwarden \
     chromium \
-    curl \
-    docker \
     emacs \
     firefox \
+    spotify \
+    && :
+
+  nix-env -i \
+    autojump \
+    bash_5 \
+    curl \
+    docker \
     git \
     gnupg \
-    gopls \
+    haskellPackages.xmonad \
+    helm \
     htop \
     iotop \
     jq \
-    ntp \
-    restic \
-    ripgrep \
+    krew \
+    minikube \
     mosh \
+    navi \
     nerdfonts \
-    nodejs-15_x \
+    ngrok \
+    ntp \
     openssh \
     powertop \
+    pssh \
     redshift \
-    spotify \
+    restic \
+    ripgrep \
     starship \
+    terraform \
     tlp \
+    vault \
     xclip \
-    haskellPackages.xmonad \
+    && :
+
+  nix-env -iA \
+    nixpkgs.nodejs-14_x \
     && :
 }
 
