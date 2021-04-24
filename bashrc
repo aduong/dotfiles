@@ -83,6 +83,8 @@ bind '"\e[Z":menu-complete'
 
 export LD_LIBRARY_PATH=/usr/local/lib
 
+export LC_ALL=C
+
 # add local bin to the path if it exists
 if [ -d ~/.local/bin ]; then
   export PATH="$HOME/.local/bin:$PATH"
