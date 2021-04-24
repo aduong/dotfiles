@@ -280,6 +280,7 @@ nix_install() {
     curl \
     docker \
     git \
+    gh \
     gnupg \
     haskellPackages.xmonad \
     helm \
