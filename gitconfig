@@ -2,7 +2,7 @@
 	name = Adrian Duong
 	email = adrian.duong@gmail.com
 [core]
-	editor = emacsclient -c
+	editor = emacsclient -s git -c
 	pager = less --ignore-case --chop-long-lines --RAW-CONTROL-CHARS
 [color]
 	ui = true
@@ -10,7 +10,7 @@
 	tool = ediff
 	defaultToUpstream = true
 [mergetool.ediff]
-	cmd = emacs --eval \"(progn (defun ediff-write-merge-buffer () (let ((file ediff-merge-store-file)) (set-buffer ediff-buffer-C) (write-region (point-min) (point-max) file) (message \\\"Merge buffer saved in: %s\\\" file) (set-buffer-modified-p nil) (sit-for 1))) (setq ediff-quit-hook 'kill-emacs ediff-quit-merge-hook 'ediff-write-merge-buffer) (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\"))\"
+	cmd = emacsclient -s git -c --eval \"(progn (defun ediff-write-merge-buffer () (let ((file ediff-merge-store-file)) (set-buffer ediff-buffer-C) (write-region (point-min) (point-max) file) (message \\\"Merge buffer saved in: %s\\\" file) (set-buffer-modified-p nil) (sit-for 1))) (setq ediff-quit-hook 'kill-emacs ediff-quit-merge-hook 'ediff-write-merge-buffer) (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\"))\"
 [grep]
 	lineNumber = 1
 [alias]
