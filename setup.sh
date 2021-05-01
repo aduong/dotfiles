@@ -276,6 +276,7 @@ nix_install() {
 
   nix-env -i \
     autojump \
+    awscli \
     bash_5 \
     curl \
     docker \
