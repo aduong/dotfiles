@@ -35,14 +35,12 @@
 
   networking.hostName = "adr-xps13";
 
-  # Set your time zone.
-  time.timeZone = "America/Los_Angeles";
-
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
   networking.interfaces.wlp1s0.useDHCP = true;
+  networking.networkmanager.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -51,10 +49,29 @@
   #   keyMap = "us";
   # };
 
-  # Enable the GNOME 3 Desktop Environment.
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome3.enable = true;
+  services.xserver = {
+    enable = true;
+    desktopManager = {
+      xterm.enable = false;
+      xfce = {
+        enable = true;
+        enableXfwm = false;
+      };
+    };
+    windowManager.xmonad = {
+      enable = true;
+      enableContribAndExtras = true;
+      extraPackages = haskellPackages : [
+        haskellPackages.xmonad-contrib
+        haskellPackages.xmonad-extras
+        haskellPackages.xmonad
+      ];
+    };
+    displayManager = {
+      gdm.enable = true;
+      # defaultSession = "xfce+xmonad";
+    };
+  };
 
   # Configure keymap in X11
   services.xserver.layout = "us";
@@ -69,21 +86,19 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
-  users.users.aduong = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
-  };
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     curl
     firefox
-    htop
     vim
+    xfce.xfce4-systemload-plugin
+    xfce.xfce4-whiskermenu-plugin
   ];
 
   location.provider = "geoclue2";
+
+  nixpkgs.config.allowUnfree = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -92,17 +107,10 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+  programs.nm-applet.enable = true;
+  programs.slock.enable = true;
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  services.redshift.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -112,5 +120,16 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
 
+  time.timeZone = "America/Los_Angeles";
+
+  users.users.aduong = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+  };
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
 }
 
