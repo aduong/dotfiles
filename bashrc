@@ -75,11 +75,6 @@ export TEXMFHOME="$HOME/.local/share/texmf"
 # point to local R libraries
 export R_LIBS="$HOME/.local/lib/R"
 
-# enable autojump
-if [ -e ~/.nix-profile/share/autojump/autojump.bash ]; then
-  . ~/.nix-profile/share/autojump/autojump.bash
-fi
-
 export EDITOR='emacsclient'
 
 bind '"\e[Z":menu-complete'
