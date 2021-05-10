@@ -135,7 +135,7 @@ EOF
 setup_xfce() {
   log 'setting up xfce settings'
   cp "$script_dir/xfce4-terminal"/* ~/.config/xfce4/terminal/
-  ln -s -f ~/.config/xfce4/terminal/{solarized-light,terminalrc}
+  cp ~/.config/xfce4/terminal/{solarized-dark,terminalrc}
 
   # TODO
   # cp "$script_dir/xfce4-config"/* ~/.config/xfce4/xfconf/xfce-perchannel-xml/
