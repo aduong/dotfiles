@@ -268,48 +268,78 @@ nix_install() {
 
   nix-env -i \
     bitwarden \
-    chromium \
     emacs \
-    firefox \
+    evince \
+    google-chrome \
+    signal-desktop \
     spotify \
+    vlc \
     && :
 
   nix-env -i \
+    ansible \
     autojump \
     awscli \
-    bash_5 \
+    bash \
+    cowsay \
     curl \
-    docker \
-    git \
+    figlet \
+    fzf \
+    gcal \
     gh \
+    git \
+    go \
+    goimports \
+    golangci-lint \
+    google-cloud-sdk \
+    gopls \
     gnupg \
-    haskellPackages.xmonad \
     helm \
     htop \
     iotop \
     jq \
     krew \
+    kubectl \
+    kubectx \
+    kustomize \
     minikube \
     mosh \
     navi \
-    nerdfonts \
     ngrok \
     ntp \
     openssh \
+    packer \
+    parallel \
+    pre-commit \
+    postgresql \
     powertop \
     pssh \
+    pv \
+    redis \
     redshift \
+    reflex \
     restic \
     ripgrep \
+    s6 \
+    shellcheck \
+    shfmt \
     starship \
+    stern \
+    sqlite \
     terraform \
     tlp \
+    traceroute \
+    tree \
     vault \
     xclip \
+    yarn \
+    yamllint \
+    yq \
     && :
 
   nix-env -iA \
     nixpkgs.nodejs-14_x \
+    nixpkgs.obsidian \
     && :
 }
 
