@@ -349,6 +349,14 @@ nix_install() {
     && :
 }
 
+setup_kvm() {
+  sudo apt-get install \
+    libvirt-clients \
+    qemu-kvm \
+    virt-manager \
+    && :
+}
+
 main() {
   nix_install
   sudo apt-get update
@@ -376,6 +384,7 @@ main() {
   setup_xfce
   setup_inotify
   setup_ansible
+  setup_kvm
 }
 
 if [[ $0 != bash ]]; then
