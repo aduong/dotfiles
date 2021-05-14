@@ -36,3 +36,5 @@ ScrollingOnOutput=FALSE
 ShortcutsNoHelpkey=TRUE
 ShortcutsNoMenukey=TRUE
 ShortcutsNoMnemonics=TRUE
+FontUseSystem=TRUE
+
