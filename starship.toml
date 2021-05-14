@@ -12,7 +12,6 @@ $git_status\
 $kubernetes\
 $memory_usage\
 $jobs\
-$cmd_duration\
 $custom\
 $status\
 $character"""
@@ -31,6 +30,7 @@ error_symbol = "[❯](red)" # default but not bold
 disabled = true
 
 [cmd_duration]
+disabled = true
 min_time = 2_000 # default
 show_milliseconds = true
 
