@@ -332,6 +332,7 @@ nix_install() {
     stern \
     sqlite \
     terraform \
+    terraform-ls \
     tlp \
     traceroute \
     tree \
