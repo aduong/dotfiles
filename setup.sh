@@ -259,6 +259,14 @@ install_nerd_fonts() {
   sudo fc-cache -v
 }
 
+setup_ansible() {
+  pip install --user \
+    ansible \
+    boto3 \
+    botocore \
+    && :
+}
+
 nix_install() {
   if ! command -v nix-env; then
     sh <(curl -L https://nixos.org/nix/install) --daemon
@@ -275,7 +283,6 @@ nix_install() {
     && :
 
   nix-env -i \
-    ansible \
     autojump \
     awscli \
     bash \
@@ -345,6 +352,13 @@ main() {
   nix_install
   sudo apt-get update
   sudo apt-get upgrade -y
+  sudo apt-get install \
+    docker \
+    docker-compose \
+    python3 \
+    python3-pip \
+    xmonad \
+    && :
 
   setup_dns
 
@@ -360,6 +374,7 @@ main() {
   setup_redshift
   setup_xfce
   setup_inotify
+  setup_ansible
 }
 
 if [[ $0 != bash ]]; then
