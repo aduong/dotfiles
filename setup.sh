@@ -331,8 +331,10 @@ nix_install() {
     redis \
     redshift \
     reflex \
+    rename \
     restic \
     ripgrep \
+    rlwrap \
     s6 \
     shellcheck \
     shfmt \
