@@ -367,6 +367,13 @@ setup_kvm() {
     && :
 }
 
+setup_krew() {
+  krew install \
+    node-shell \
+    tree \
+    && :
+}
+
 main() {
   nix_install
   sudo apt-get update
@@ -397,6 +404,7 @@ main() {
   setup_inotify
   setup_ansible
   setup_kvm
+  setup_krew
 }
 
 if [[ $0 != bash ]]; then
