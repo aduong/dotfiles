@@ -300,12 +300,13 @@ nix_install() {
     gcal \
     gh \
     git \
+    gnupg \
     go \
     goimports \
     golangci-lint \
     google-cloud-sdk \
     gopls \
-    gnupg \
+    graphviz \
     helm \
     htop \
     iotop \
