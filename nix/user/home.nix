@@ -65,6 +65,11 @@
       enable = true;
       provider = "geoclue2";
     };
+
+    syncthing = {
+      enable = true;
+      tray = true;
+    };
   };
 
   programs =  {
