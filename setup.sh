@@ -302,7 +302,6 @@ nix_install() {
     gnupg \
     go \
     goimports \
-    golangci-lint \
     google-cloud-sdk \
     graphviz \
     helm \
@@ -328,7 +327,6 @@ nix_install() {
     pv \
     redis \
     redshift \
-    reflex \
     rename \
     restic \
     ripgrep \
