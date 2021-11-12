@@ -283,7 +283,6 @@ nix_install() {
     bitwarden \
     emacs \
     evince \
-    google-chrome \
     signal-desktop \
     spotify \
     vlc \
@@ -373,6 +372,14 @@ setup_krew() {
     && :
 }
 
+install_chrome() {
+  local tmpdir
+  tmpdir=$(mktemp -d)
+  curl -L -o "${tmpdir}/chrome.deb" https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  sudo dpkg -i "${tmpdir}/chrome.deb"
+  rm -r tmpdir
+}
+
 main() {
   nix_install
   sudo apt-get update
@@ -404,6 +411,8 @@ main() {
   setup_ansible
   setup_kvm
   setup_krew
+
+  install_chrome
 }
 
 if [[ $0 != bash ]]; then
