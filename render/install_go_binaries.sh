@@ -11,5 +11,5 @@ packages=(
 
 cd
 for pkg in "${packages[@]}"; do
-  GO111MODULE=on go get "$pkg"
+  go install "$pkg"
 done
