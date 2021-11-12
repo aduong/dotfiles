@@ -305,7 +305,6 @@ nix_install() {
     goimports \
     golangci-lint \
     google-cloud-sdk \
-    gopls \
     graphviz \
     helm \
     htop \
