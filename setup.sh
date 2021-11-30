@@ -301,7 +301,6 @@ nix_install() {
     git \
     gnupg \
     go \
-    goimports \
     google-cloud-sdk \
     graphviz \
     helm \
@@ -327,7 +326,6 @@ nix_install() {
     pv \
     redis \
     redshift \
-    rename \
     restic \
     ripgrep \
     rlwrap \
@@ -350,8 +348,10 @@ nix_install() {
     && :
 
   nix-env -iA \
+    nixpkgs.goimports \
     nixpkgs.nodejs-14_x \
     nixpkgs.obsidian \
+    nixpkgs.rename \
     && :
 }
 
