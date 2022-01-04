@@ -282,7 +282,6 @@ nix_install() {
   nix-env -i \
     bitwarden \
     emacs \
-    evince \
     signal-desktop \
     spotify \
     vlc \
@@ -348,6 +347,7 @@ nix_install() {
     && :
 
   nix-env -iA \
+    nixpkgs.evince \
     nixpkgs.goimports \
     nixpkgs.nodejs-14_x \
     nixpkgs.obsidian \
