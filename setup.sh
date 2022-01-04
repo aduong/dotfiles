@@ -285,6 +285,7 @@ nix_install() {
     signal-desktop \
     spotify \
     vlc \
+    xournal \
     && :
 
   nix-env -i \
