@@ -333,7 +333,6 @@ nix_install() {
     shfmt \
     starship \
     stern \
-    sqlite \
     terraform \
     terraform-ls \
     tlp \
@@ -388,6 +387,7 @@ main() {
     docker-compose \
     python3 \
     python3-pip \
+    sqlite3 \
     xmonad \
     && :
 
