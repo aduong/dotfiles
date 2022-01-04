@@ -319,7 +319,6 @@ nix_install() {
     openssh \
     packer \
     parallel \
-    pre-commit \
     postgresql \
     powertop \
     pssh \
@@ -352,6 +351,7 @@ nix_install() {
     nixpkgs.goimports \
     nixpkgs.nodejs-14_x \
     nixpkgs.obsidian \
+    nixpkgs.pre-commit \
     nixpkgs.rename \
     && :
 }
