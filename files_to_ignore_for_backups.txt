@@ -3,3 +3,6 @@
 node_modules
 .config/Signal
 .minikube
+go/bin
+go/pkg
+.config/google-chrome/**/CacheStorage
