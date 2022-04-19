@@ -110,4 +110,6 @@ if [ -f ~/.bashrc.local ]; then
   . ~/.bashrc.local
 fi
 
+export DOCKER_BUILDKIT=1
+
 eval "$(starship init bash)"
