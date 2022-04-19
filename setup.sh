@@ -347,8 +347,7 @@ nix_install() {
 
   nix-env -iA \
     nixpkgs.evince \
-    nixpkgs.goimports \
-    nixpkgs.nodejs-14_x \
+    nixpkgs.gotools \
     nixpkgs.obsidian \
     nixpkgs.pre-commit \
     nixpkgs.rename \
@@ -376,6 +375,12 @@ install_chrome() {
   curl -L -o "${tmpdir}/chrome.deb" https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   sudo dpkg -i "${tmpdir}/chrome.deb"
   rm -r tmpdir
+}
+
+install_nvm() {
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+  nvm install
+  nvm install --lts
 }
 
 main() {
@@ -412,6 +417,7 @@ main() {
   setup_krew
 
   install_chrome
+  install_nvm
 }
 
 if [[ $0 != bash ]]; then
