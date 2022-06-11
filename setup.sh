@@ -339,7 +339,6 @@ nix_install() {
     tree \
     vault \
     xclip \
-    yarn \
     yamllint \
     yq \
     && :
