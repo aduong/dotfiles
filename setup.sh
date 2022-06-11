@@ -320,7 +320,6 @@ nix_install() {
     packer \
     parallel \
     postgresql \
-    powertop \
     pssh \
     pv \
     redis \
@@ -390,6 +389,7 @@ main() {
   sudo apt-get install \
     docker \
     docker-compose \
+    powertop \
     python3 \
     python3-pip \
     sqlite3 \
