@@ -322,6 +322,7 @@ nix_install() {
     minikube \
     mosh \
     navi \
+    ncdu \
     ngrok \
     ntp \
     openssh \
