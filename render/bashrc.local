@@ -29,6 +29,9 @@ export PATH="$gcloud_path:$yarn_path:$yarn_global_path:$rust_path:$go_path:$node
 export VAULT_ADDR='https://vault.render.com:8200'
 export VAULT_FORMAT=yaml
 
+export RENDER_API_PATH=/home/aduong/workspace/renderinc/api
+export RENDER_USE_PGCLI=true
+
 ssl_get_cert() {
   local host=$1
   openssl s_client -connect $host:443 -servername $host < /dev/null 2>/dev/null \
