@@ -39,3 +39,13 @@ ssl_get_cert() {
     | perl -ne 'if(/-BEGIN CERTIFICATE-/){$p=1} ; print if $p; if(/-END CERTIFICATE-/) {$p=0}' \
     | openssl x509 -text -noout
 }
+
+darkmode() {
+  cp ~/.config/xfce4/terminal/{solarized-dark,terminalrc}
+}
+
+lightmode() {
+  cp ~/.config/xfce4/terminal/{solarized-light,terminalrc}
+}
+
+. ~/.local/lib/bash/terminal.sh
