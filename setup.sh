@@ -281,6 +281,7 @@ nix_install() {
 
   nix-env -i \
     bitwarden \
+    discord \
     emacs \
     signal-desktop \
     spotify \
