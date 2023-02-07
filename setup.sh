@@ -298,7 +298,7 @@ nix_install() {
 
   nix-env -i \
     autojump \
-    awscli \
+    awscli2 \
     bash \
     cowsay \
     curl \
