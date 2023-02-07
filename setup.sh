@@ -289,6 +289,13 @@ nix_install() {
     xournal \
     && :
 
+  ln -s -t ~/.local/share/applications/ \
+     ~/.nix-profile/share/applications/bitwarden.desktop \
+     ~/.nix-profile/share/applications/emacs.desktop \
+     ~/.nix-profile/share/applications/discord.desktop \
+     ~/.nix-profile/share/applications/spotify.desktop \
+     && :
+
   nix-env -i \
     autojump \
     awscli \
