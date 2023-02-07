@@ -328,6 +328,7 @@ nix_install() {
     openssh \
     packer \
     parallel \
+    pgcli \
     postgresql \
     pssh \
     pv \
