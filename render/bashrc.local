@@ -2,7 +2,9 @@
 
 # kube aliases
 alias k=kubectl
+complete -F __start_kubectl k
 alias kctl=kubectl
+complete -F __start_kubectl kctl
 alias kns=kubens
 alias kctx=kubectx
 
