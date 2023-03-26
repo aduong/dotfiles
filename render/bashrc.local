@@ -26,14 +26,15 @@ export GOBIN=$GOPATH/bin
 export GOROOT=/opt/go/current
 
 export LD_LIBRARY_PATH=/usr/local/lib
+
+export RENDER_API_PATH=/home/aduong/workspace/renderinc/api
+export RENDER_USE_PGCLI=true
+
 export PATH=${RENDER_API_PATH}/jobrunner:$PATH
 export PATH="$gcloud_path:$yarn_path:$yarn_global_path:$rust_path:$go_path:$node_path:$heroku_path:$sbt_path:$PATH"
 
 export VAULT_ADDR='https://vault.render.com:8200'
 export VAULT_FORMAT=yaml
-
-export RENDER_API_PATH=/home/aduong/workspace/renderinc/api
-export RENDER_USE_PGCLI=true
 
 ssl_get_cert() {
   local host=$1
