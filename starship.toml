@@ -1,6 +1,7 @@
 add_newline = false
 
 format = """
+$time\
 $username\
 $hostname\
 $shlvl\
@@ -13,7 +14,7 @@ $kubernetes\
 $memory_usage\
 $jobs\
 $custom\
-$status\
+$status
 $character"""
 
 [aws]
@@ -133,6 +134,14 @@ disabled = true
 
 [terraform]
 disabled = true
+# ~/.config/starship.toml
+
+[time]
+disabled = false
+format = '🕙[\[$time\]]($style) '
+time_format = '%T'
+utc_time_offset = 'local'
+time_range = '-'
 
 [zig]
 disabled = true
