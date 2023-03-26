@@ -283,7 +283,6 @@ nix_install() {
     bitwarden \
     discord \
     emacs \
-    signal-desktop \
     spotify \
     vlc \
     xournal \
@@ -427,6 +426,9 @@ main() {
 
   install_chrome
   install_nvm
+
+  # TODO signal
+
 }
 
 if [[ $0 != bash ]]; then
