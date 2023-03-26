@@ -90,7 +90,7 @@ format = "(✦$number )"
 disabled = true
 
 [kubernetes]
-disabled = true
+disabled = false
 format = "[$symbol$context( \\($namespace\\))]($style) " # default without " in" suffix
 
 [nim]
