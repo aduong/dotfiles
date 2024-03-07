@@ -267,13 +267,6 @@ setup_ansible() {
     && :
 }
 
-pip_install() {
-  pip install --user \
-      magic-wormhole \
-      pre-commit \
-    && :
-}
-
 nix_install() {
   if ! command -v nix-env; then
     sh <(curl -L https://nixos.org/nix/install) --daemon
@@ -394,11 +387,10 @@ main() {
     powertop \
     python3 \
     python3-pip \
+    tlp \
     sqlite3 \
     xmonad \
     && :
-
-  pip_install
 
   setup_dns
 
