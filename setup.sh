@@ -297,7 +297,6 @@ nix_install() {
     nixpkgs.gh \
     nixpkgs.git \
     nixpkgs.gnupg \
-    nixpkgs.gotools \
     nixpkgs.graphviz \
     nixpkgs.htop \
     nixpkgs.iotop \
