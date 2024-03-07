@@ -279,85 +279,79 @@ nix_install() {
     sh <(curl -L https://nixos.org/nix/install) --daemon
   fi
 
-  nix-env -i \
-    bitwarden \
-    discord \
-    emacs \
-    spotify \
-    vlc \
-    xournal \
-    && :
-
-  ln -s -t ~/.local/share/applications/ \
+  ln -s -f -t ~/.local/share/applications/ \
      ~/.nix-profile/share/applications/bitwarden.desktop \
      ~/.nix-profile/share/applications/emacs.desktop \
      ~/.nix-profile/share/applications/discord.desktop \
      ~/.nix-profile/share/applications/spotify.desktop \
      && :
 
-  nix-env -i \
-    autojump \
-    awscli2 \
-    bash \
-    cowsay \
-    curl \
-    figlet \
-    fzf \
-    gcal \
-    gh \
-    git \
-    gnupg \
-    go \
-    google-cloud-sdk \
-    graphviz \
-    helm \
-    htop \
-    iotop \
-    jq \
-    krew \
-    kubectl \
-    kubectx \
-    kustomize \
-    minikube \
-    mosh \
-    navi \
-    ncdu \
-    ngrok \
-    ntp \
-    openssh \
-    packer \
-    parallel \
-    pgcli \
-    postgresql \
-    pssh \
-    pv \
-    redis \
-    redshift \
-    restic \
-    ripgrep \
-    rlwrap \
-    s6 \
-    shellcheck \
-    shfmt \
-    starship \
-    stern \
-    terraform \
-    terraform-ls \
-    tlp \
-    traceroute \
-    tree \
-    vault \
-    xclip \
-    yamllint \
-    yq \
-    && :
-
   nix-env -iA \
+    nixpkgs.age \
+    nixpkgs.age-plugin-yubikey \
+    nixpkgs.autojump \
+    nixpkgs.awscli2 \
+    nixpkgs.bash \
+    nixpkgs.bitwarden \
+    nixpkgs.cowsay \
+    nixpkgs.curl \
+    nixpkgs.discord \
+    nixpkgs.emacs29 \
     nixpkgs.evince \
+    nixpkgs.figlet \
+    nixpkgs.fzf \
+    nixpkgs.gcal \
+    nixpkgs.gh \
+    nixpkgs.git \
+    nixpkgs.gnupg \
     nixpkgs.gotools \
+    nixpkgs.graphviz \
+    nixpkgs.htop \
+    nixpkgs.iotop \
+    nixpkgs.jq \
+    nixpkgs.krew \
+    nixpkgs.kubectl \
+    nixpkgs.kubectx \
+    nixpkgs.kubernetes-helm \
+    nixpkgs.kustomize \
+    nixpkgs.minikube \
+    nixpkgs.mosh \
+    nixpkgs.navi \
+    nixpkgs.ncdu \
+    nixpkgs.ngrok \
+    nixpkgs.ntp \
     nixpkgs.obsidian \
+    nixpkgs.openssh \
+    nixpkgs.packer \
+    nixpkgs.parallel \
+    nixpkgs.pgcli \
+    nixpkgs.postgresql_16 \
     nixpkgs.pre-commit \
+    nixpkgs.pssh \
+    nixpkgs.pv \
+    nixpkgs.redis \
+    nixpkgs.redshift \
     nixpkgs.rename \
+    nixpkgs.restic \
+    nixpkgs.ripgrep \
+    nixpkgs.rlwrap \
+    nixpkgs.s6 \
+    nixpkgs.shellcheck \
+    nixpkgs.shfmt \
+    nixpkgs.spotify \
+    nixpkgs.starship \
+    nixpkgs.stern \
+    nixpkgs.terraform \
+    nixpkgs.terraform-ls \
+    nixpkgs.traceroute \
+    nixpkgs.tree \
+    nixpkgs.vault \
+    nixpkgs.vlc \
+    nixpkgs.xclip \
+    nixpkgs.xournal \
+    nixpkgs.yamllint \
+    nixpkgs.yq \
+    nixpkgs.zx \
     && :
 }
 
