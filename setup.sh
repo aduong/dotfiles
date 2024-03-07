@@ -335,6 +335,7 @@ nix_install() {
     nixpkgs.stern \
     nixpkgs.terraform \
     nixpkgs.terraform-ls \
+    nixpkgs.tilt \
     nixpkgs.traceroute \
     nixpkgs.tree \
     nixpkgs.vault \
