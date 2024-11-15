@@ -377,6 +377,57 @@ install_nvm() {
   nvm install --lts
 }
 
+install_noise_suppression_for_voice() {
+  local tmpdir=$(mktemp -d)
+  local libdir=/usr/local/lib
+  curl -o "${tmpdir}/linux-rnnoise.zip" -L https://github.com/werman/noise-suppression-for-voice/releases/download/v1.10/linux-rnnoise.zip
+  if ! sha256sum -c <<< "811390b6eb6e28dde023c70590c74d26e74ebb2e595bcf4b95af2341db160e99  ${tmpdir}/linux-rnnoise.zip"; then
+    return 1
+  fi
+  pushd "${tmpdir}"
+  unzip linux-rnnoise.zip
+  sudo find linux-rnnoise -name '*.so' -exec cp -v '{}' "${libdir}" \;
+  popd
+  local confdir=${HOME}/.config/pipewire/pipewire.conf.d
+  mkdir -p "${confdir}"
+  cat > "${confdir}/99-input-denoising.conf" <<EOF
+context.modules = [
+{   name = libpipewire-module-filter-chain
+    args = {
+        node.description =  "Noise Canceling source"
+        media.name =  "Noise Canceling source"
+        filter.graph = {
+            nodes = [
+                {
+                    type = ladspa
+                    name = rnnoise
+                    plugin = ${libdir}/librnnoise_ladspa.so
+                    label = noise_suppressor_mono
+                    control = {
+                        "VAD Threshold (%)" = 50.0
+                        "VAD Grace Period (ms)" = 200
+                        "Retroactive VAD Grace (ms)" = 0
+                    }
+                }
+            ]
+        }
+        capture.props = {
+            node.name =  "capture.rnnoise_source"
+            node.passive = true
+            audio.rate = 48000
+        }
+        playback.props = {
+            node.name =  "rnnoise_source"
+            media.class = Audio/Source
+            audio.rate = 48000
+        }
+    }
+}
+]
+EOF
+  rm -rf "${tmpdir}"
+}
+
 main() {
   nix_install
   sudo apt-get update
@@ -412,6 +463,8 @@ main() {
 
   install_chrome
   install_nvm
+
+  install_noise_suppression_for_voice
 
   # TODO signal
 
