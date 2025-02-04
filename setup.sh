@@ -282,10 +282,12 @@ nix_install() {
   nix-env -iA \
     nixpkgs.age \
     nixpkgs.age-plugin-yubikey \
+    nixpkgs.amazon-ecr-credential-helper \
     nixpkgs.autojump \
     nixpkgs.awscli2 \
     nixpkgs.bash \
-    nixpkgs.bitwarden \
+    nixpkgs.bazelisk \
+    nixpkgs.crane \
     nixpkgs.cowsay \
     nixpkgs.curl \
     nixpkgs.discord \
@@ -312,7 +314,6 @@ nix_install() {
     nixpkgs.ncdu \
     nixpkgs.ngrok \
     nixpkgs.ntp \
-    nixpkgs.obsidian \
     nixpkgs.openssh \
     nixpkgs.packer \
     nixpkgs.parallel \
@@ -341,7 +342,7 @@ nix_install() {
     nixpkgs.vault \
     nixpkgs.vlc \
     nixpkgs.xclip \
-    nixpkgs.xournal \
+    nixpkgs.xournalpp \
     nixpkgs.yamllint \
     nixpkgs.yq \
     nixpkgs.zx \
