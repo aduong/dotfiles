@@ -75,7 +75,7 @@ This function should only modify configuration layer settings."
      terraform
      treemacs
      (typescript :variables
-                 typescript-backend 'tide
+                 typescript-backend 'lsp
                  typescript-indent-level 2)
      )
 
