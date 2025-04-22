@@ -602,47 +602,100 @@ before packages are loaded."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(sanityinc-solarized-dark))
- '(custom-safe-themes
-   '("4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default))
- '(evil-want-Y-yank-to-eol nil)
- '(helm-completion-style 'emacs)
- '(hl-todo-keyword-faces
-   '(("TODO" . "#dc752f")
-     ("NEXT" . "#dc752f")
-     ("THEM" . "#2d9574")
-     ("PROG" . "#4f97d7")
-     ("OKAY" . "#4f97d7")
-     ("DONT" . "#f2241f")
-     ("FAIL" . "#f2241f")
-     ("DONE" . "#86dc2f")
-     ("NOTE" . "#b1951d")
-     ("KLUDGE" . "#b1951d")
-     ("HACK" . "#b1951d")
-     ("TEMP" . "#b1951d")
-     ("FIXME" . "#dc752f")
-     ("XXX+" . "#dc752f")
-     ("\\?\\?\\?+" . "#dc752f")))
- '(lsp-ui-doc-delay 1.0)
- '(lsp-ui-doc-enable nil)
- '(package-selected-packages
-   '(csv-mode systemd journalctl-mode evil-collection graphviz-dot-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode company-web web-completion-data sqlup-mode sql-indent yapfify utop tuareg caml treemacs-magit smeargle seeing-is-believing rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocopfmt rubocop rspec-mode robe rbenv rake pytest pyenv-mode py-isort pippel pipenv pyvenv pip-requirements orgit ocp-indent ob-elixir mvn minitest meghanada maven-test-mode magit-svn magit-section magit-gitflow magit-popup lsp-python-ms lsp-java live-py-mode importmagic epc ctable concurrent deferred helm-pydoc helm-gitignore helm-git-grep groovy-mode groovy-imports pcache gradle-mode gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ fringe-helper git-gutter+ flycheck-ocaml merlin flycheck-credo evil-magit magit git-commit with-editor transient emojify emoji-cheat-sheet-plus dune cython-mode company-emoji company-anaconda chruby bundler inf-ruby browse-at-remote blacken anaconda-mode pythonic alchemist elixir-mode org-superstar jinja2-mode company-ansible ansible-doc ansible rjsx-mode emmet-mode toml-mode racer flycheck-rust cargo rust-mode color-theme-sanityinc-solarized json-navigator hierarchy json-mode json-snatcher json-reformat web-beautify tide typescript-mode tern prettier-js nodejs-repl livid-mode skewer-mode js2-refactor multiple-cursors js2-mode js-doc import-js grizzl impatient-mode simple-httpd helm-gtags ggtags counsel-gtags counsel swiper ivy add-node-modules-path company-terraform terraform-mode hcl-mode yaml-mode yasnippet-snippets posframe org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-brain mmm-mode markdown-toc lsp-ui htmlize helm-org-rifle helm-org helm-lsp helm-company helm-c-yasnippet godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gh-md fuzzy flycheck-pos-tip pos-tip evil-org dap-mode lsp-treemacs bui lsp-mode markdown-mode dash-functional company-go go-mode company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler writeroom-mode visual-fill-column winum volatile-highlights vi-tilde-fringe uuidgen treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil treemacs ht pfuture toc-org symon symbol-overlay string-inflection spaceline-all-the-icons all-the-icons memoize spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode password-generator paradox spinner overseer org-bullets open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio flycheck-package package-lint flycheck let-alist flycheck-elsa flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired f evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens evil-args evil-anzu anzu eval-sexp-fu emr iedit clang-format projectile paredit list-utils pkg-info epl elisp-slime-nav editorconfig dumb-jump dash s devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el org-plus-contrib hydra lv hybrid-mode font-lock+ evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async))
- '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
- '(safe-local-variable-values
-   '((create-lockfiles)
-     (go-backend . go-mode)
-     (go-backend . lsp)))
- '(sh-basic-offset 2)
- '(which-key-idle-delay 1.0))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t))
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(custom-enabled-themes '(sanityinc-solarized-light))
+   '(custom-safe-themes
+     '("6819104c5f7d70485b32c10323aa396806d282fcee5b707e462bf3d156f44c39"
+       "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4"
+       "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default))
+   '(evil-want-Y-yank-to-eol nil)
+   '(fill-column 100)
+   '(gc-cons-threshold 1000000000)
+   '(helm-completion-style 'emacs)
+   '(hl-todo-keyword-faces
+     '(("TODO" . "#dc752f") ("NEXT" . "#dc752f") ("THEM" . "#2d9574") ("PROG" . "#4f97d7")
+       ("OKAY" . "#4f97d7") ("DONT" . "#f2241f") ("FAIL" . "#f2241f") ("DONE" . "#86dc2f")
+       ("NOTE" . "#b1951d") ("KLUDGE" . "#b1951d") ("HACK" . "#b1951d") ("TEMP" . "#b1951d")
+       ("FIXME" . "#dc752f") ("XXX+" . "#dc752f") ("\\?\\?\\?+" . "#dc752f")))
+   '(lsp-file-watch-ignored-directories
+     '("[/\\\\]\\.git\\'" "[/\\\\]\\.github\\'" "[/\\\\]\\.gitlab\\'" "[/\\\\]\\.circleci\\'"
+       "[/\\\\]\\.hg\\'" "[/\\\\]\\.bzr\\'" "[/\\\\]_darcs\\'" "[/\\\\]\\.svn\\'" "[/\\\\]_FOSSIL_\\'"
+       "[/\\\\]\\.idea\\'" "[/\\\\]\\.ensime_cache\\'" "[/\\\\]\\.eunit\\'" "[/\\\\]node_modules"
+       "[/\\\\]\\.yarn\\'" "[/\\\\]\\.fslckout\\'" "[/\\\\]\\.tox\\'" "[/\\\\]\\.nox\\'"
+       "[/\\\\]dist\\'" "[/\\\\]dist-newstyle\\'" "[/\\\\]\\.stack-work\\'" "[/\\\\]\\.bloop\\'"
+       "[/\\\\]\\.metals\\'" "[/\\\\]target\\'" "[/\\\\]\\.ccls-cache\\'" "[/\\\\]\\.vscode\\'"
+       "[/\\\\]\\.venv\\'" "[/\\\\]\\.mypy_cache\\'" "[/\\\\]\\.pytest_cache\\'" "[/\\\\]\\.build\\'"
+       "[/\\\\]__pycache__\\'" "[/\\\\]\\.deps\\'" "[/\\\\]build-aux\\'" "[/\\\\]autom4te.cache\\'"
+       "[/\\\\]\\.reference\\'" "[/\\\\]bazel-[^/\\\\]+\\'" "[/\\\\]\\.meta\\'" "[/\\\\]Library\\'"
+       "[/\\\\]\\.lsp\\'" "[/\\\\]\\.clj-kondo\\'" "[/\\\\]\\.shadow-cljs\\'"
+       "[/\\\\]\\.babel_cache\\'" "[/\\\\]\\.cpcache\\'" "[/\\\\]\\checkouts\\'" "[/\\\\]\\.gradle\\'"
+       "[/\\\\]\\.m2\\'" "[/\\\\]bin/Debug\\'" "[/\\\\]obj\\'" "[/\\\\]_opam\\'" "[/\\\\]_build\\'"
+       "[/\\\\]\\.elixir_ls\\'" "[/\\\\]\\.elixir-tools\\'" "[/\\\\]\\.terraform\\'"
+       "[/\\\\]\\.terragrunt-cache\\'" "[/\\\\]\\.direnv\\'" "[/\\\\]secrets\\'"))
+   '(lsp-ui-doc-delay 1.0)
+   '(lsp-ui-doc-enable nil)
+   '(package-selected-packages
+     '(ac-ispell ace-jump-helm-line ace-link ace-window add-node-modules-path aggressive-indent alchemist
+                 alert all-the-icons anaconda-mode ansible ansible-doc anzu async auto-compile
+                 auto-complete auto-highlight-symbol auto-yasnippet avy bind-key bind-map blacken
+                 browse-at-remote bui bundler caml cargo centered-cursor-mode chruby clang-format
+                 clean-aindent-mode color-theme-sanityinc-solarized column-enforce-mode company
+                 company-anaconda company-ansible company-emoji company-go company-terraform
+                 company-web concurrent counsel counsel-gtags csv-mode ctable cython-mode dap-mode
+                 dash dash-functional deferred define-word devdocs diminish dotenv-mode dumb-jump dune
+                 editorconfig elisp-slime-nav elixir-mode emmet-mode emoji-cheat-sheet-plus emojify
+                 emr epc epl eval-sexp-fu evil evil-anzu evil-args evil-cleverparens evil-collection
+                 evil-ediff evil-escape evil-exchange evil-goggles evil-iedit-state evil-indent-plus
+                 evil-lion evil-lisp-state evil-magit evil-matchit evil-mc evil-nerd-commenter
+                 evil-numbers evil-org evil-surround evil-textobj-line evil-tutor evil-unimpaired
+                 evil-visual-mark-mode evil-visualstar expand-region eyebrowse f fancy-battery
+                 fill-column-indicator flx flx-ido flycheck flycheck-credo flycheck-elsa
+                 flycheck-ocaml flycheck-package flycheck-pos-tip flycheck-rust font-lock+
+                 fringe-helper fuzzy ggtags gh-md git-commit git-gutter+ git-gutter-fringe+ git-link
+                 git-messenger git-timemachine gitattributes-mode gitconfig-mode gitignore-mode
+                 gitignore-templates gntp gnuplot go-eldoc go-fill-struct go-gen-test go-guru go-impl
+                 go-mode go-rename go-tag godoctor golden-ratio google-translate goto-chg gradle-mode
+                 graphviz-dot-mode grizzl groovy-imports groovy-mode haml-mode hcl-mode helm helm-ag
+                 helm-c-yasnippet helm-company helm-core helm-css-scss helm-descbinds helm-flx
+                 helm-git-grep helm-gitignore helm-gtags helm-ls-git helm-lsp helm-make
+                 helm-mode-manager helm-org helm-org-rifle helm-projectile helm-purpose helm-pydoc
+                 helm-swoop helm-themes helm-xref hierarchy highlight-indentation highlight-numbers
+                 highlight-parentheses hl-todo ht htmlize hungry-delete hybrid-mode hydra iedit
+                 imenu-list impatient-mode import-js importmagic indent-guide inf-ruby ivy jinja2-mode
+                 journalctl-mode js-doc js2-mode js2-refactor json-mode json-navigator json-reformat
+                 json-snatcher let-alist link-hint list-utils live-py-mode livid-mode log4e
+                 lorem-ipsum lsp-java lsp-mode lsp-python-ms lsp-treemacs lsp-ui lv macrostep magit
+                 magit-gitflow magit-popup magit-section magit-svn markdown-mode markdown-toc
+                 maven-test-mode meghanada memoize merlin minitest mmm-mode move-text multiple-cursors
+                 mvn nameless nodejs-repl ob-elixir ocp-indent open-junk-file org-brain org-bullets
+                 org-category-capture org-cliplink org-download org-mime org-plus-contrib org-pomodoro
+                 org-present org-projectile org-superstar orgit overseer package-lint packed paradox
+                 paredit parent-mode password-generator pcache pcre2el persp-mode pfuture
+                 pip-requirements pipenv pippel pkg-info popup popwin pos-tip posframe powerline
+                 prettier-js projectile pug-mode py-isort pyenv-mode pytest pythonic pyvenv racer
+                 rainbow-delimiters rake rbenv request restart-emacs rjsx-mode robe rspec-mode rubocop
+                 rubocopfmt ruby-hash-syntax ruby-refactor ruby-test-mode ruby-tools rust-mode rvm s
+                 sass-mode scss-mode seeing-is-believing simple-httpd skewer-mode slim-mode
+                 smartparens smeargle spaceline spaceline-all-the-icons spinner sql-indent sqlup-mode
+                 string-inflection swiper symbol-overlay symon systemd tagedit tern terraform-mode
+                 tide toc-org toml-mode transient treemacs treemacs-evil treemacs-icons-dired
+                 treemacs-magit treemacs-persp treemacs-projectile tuareg typescript-mode undo-tree
+                 use-package utop uuidgen vi-tilde-fringe visual-fill-column volatile-highlights
+                 web-beautify web-completion-data web-mode which-key window-purpose winum with-editor
+                 writeroom-mode ws-butler yaml-mode yapfify yasnippet yasnippet-snippets))
+   '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
+   '(safe-local-variable-values
+     '((create-lockfiles) (go-backend . go-mode) (go-backend . lsp)))
+   '(sh-basic-offset 2)
+   '(which-key-idle-delay 1.0))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t))
+  )
