@@ -1,0 +1,77 @@
+{
+  allowUnfree = true;
+  packageOverrides =
+    pkgs: with pkgs; {
+      myPackages = pkgs.buildEnv {
+        name = "adr-fw1-r";
+        paths = [
+          age
+          age-plugin-yubikey
+          amazon-ecr-credential-helper
+          autojump
+          awscli2
+          bazelisk
+          crane
+          cowsay
+          curl
+          discord
+          emacs
+          evince
+          figlet
+          fzf
+          gcal
+          gh
+          git
+          gnupg
+          gotools
+          graphviz
+          htop
+          iotop
+          jq
+          krew
+          kubectl
+          kubectx
+          kubernetes-helm
+          kustomize
+          minikube
+          mosh
+          navi
+          ncdu
+          ngrok
+          ntp
+          openssh
+          packer
+          parallel
+          pgcli
+          postgresql_16
+          pre-commit
+          pssh
+          pv
+          redis
+          redshift
+          rename
+          restic
+          ripgrep
+          rlwrap
+          s6
+          shellcheck
+          shfmt
+          spotify
+          starship
+          stern
+          terraform
+          terraform-ls
+          tilt
+          traceroute
+          tree
+          vault
+          vlc
+          xclip
+          xournalpp
+          yamllint
+          yq
+          zx
+        ];
+      };
+    };
+}

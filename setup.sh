@@ -272,80 +272,25 @@ nix_install() {
     sh <(curl -L https://nixos.org/nix/install) --daemon
   fi
 
+  mkdir -p ~/.config/nixpkgs
+  ln -sf "$script_dir/config.nix" ~/.config/nixpkgs/config.nix
+
+  nix-env -iA nixpkgs.myPackages
+
   ln -s -f -t ~/.local/share/applications/ \
      ~/.nix-profile/share/applications/bitwarden.desktop \
      ~/.nix-profile/share/applications/emacs.desktop \
      ~/.nix-profile/share/applications/discord.desktop \
      ~/.nix-profile/share/applications/spotify.desktop \
      && :
+}
 
-  nix-env -iA \
-    nixpkgs.age \
-    nixpkgs.age-plugin-yubikey \
-    nixpkgs.amazon-ecr-credential-helper \
-    nixpkgs.autojump \
-    nixpkgs.awscli2 \
-    nixpkgs.bash \
-    nixpkgs.bazelisk \
-    nixpkgs.crane \
-    nixpkgs.cowsay \
-    nixpkgs.curl \
-    nixpkgs.discord \
-    nixpkgs.emacs29 \
-    nixpkgs.evince \
-    nixpkgs.figlet \
-    nixpkgs.fzf \
-    nixpkgs.gcal \
-    nixpkgs.gh \
-    nixpkgs.git \
-    nixpkgs.gnupg \
-    nixpkgs.graphviz \
-    nixpkgs.htop \
-    nixpkgs.iotop \
-    nixpkgs.jq \
-    nixpkgs.krew \
-    nixpkgs.kubectl \
-    nixpkgs.kubectx \
-    nixpkgs.kubernetes-helm \
-    nixpkgs.kustomize \
-    nixpkgs.minikube \
-    nixpkgs.mosh \
-    nixpkgs.navi \
-    nixpkgs.ncdu \
-    nixpkgs.ngrok \
-    nixpkgs.ntp \
-    nixpkgs.openssh \
-    nixpkgs.packer \
-    nixpkgs.parallel \
-    nixpkgs.pgcli \
-    nixpkgs.postgresql_16 \
-    nixpkgs.pre-commit \
-    nixpkgs.pssh \
-    nixpkgs.pv \
-    nixpkgs.redis \
-    nixpkgs.redshift \
-    nixpkgs.rename \
-    nixpkgs.restic \
-    nixpkgs.ripgrep \
-    nixpkgs.rlwrap \
-    nixpkgs.s6 \
-    nixpkgs.shellcheck \
-    nixpkgs.shfmt \
-    nixpkgs.spotify \
-    nixpkgs.starship \
-    nixpkgs.stern \
-    nixpkgs.terraform \
-    nixpkgs.terraform-ls \
-    nixpkgs.tilt \
-    nixpkgs.traceroute \
-    nixpkgs.tree \
-    nixpkgs.vault \
-    nixpkgs.vlc \
-    nixpkgs.xclip \
-    nixpkgs.xournalpp \
-    nixpkgs.yamllint \
-    nixpkgs.yq \
-    nixpkgs.zx \
+snap_install() {
+  sudo snap install \
+    bitwarden \
+    bw \
+    goland \
+    rustup \
     && :
 }
 
