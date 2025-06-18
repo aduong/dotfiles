@@ -65,6 +65,7 @@ This function should only modify configuration layer settings."
      lsp
      markdown
      multiple-cursors
+     nixos
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
