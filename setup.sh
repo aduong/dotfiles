@@ -278,9 +278,9 @@ nix_install() {
   nix-env -iA nixpkgs.myPackages
 
   ln -s -f -t ~/.local/share/applications/ \
-     ~/.nix-profile/share/applications/bitwarden.desktop \
      ~/.nix-profile/share/applications/emacs.desktop \
      ~/.nix-profile/share/applications/discord.desktop \
+     ~/.nix-profile/share/applications/obsidian.desktop \
      ~/.nix-profile/share/applications/spotify.desktop \
      && :
 }

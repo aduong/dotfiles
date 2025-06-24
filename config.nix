@@ -11,6 +11,7 @@
           autojump
           awscli2
           bazelisk
+          calibre
           crane
           cowsay
           curl
@@ -31,6 +32,7 @@
           krew
           kubectl
           kubectx
+          kubelogin-oidc
           kubernetes-helm
           kustomize
           minikube
@@ -39,6 +41,7 @@
           ncdu
           ngrok
           ntp
+          obsidian
           openssh
           packer
           parallel
