@@ -39,6 +39,7 @@
           navi
           ncdu
           ngrok
+          nmap
           ntp
           obsidian
           openssh
