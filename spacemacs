@@ -234,7 +234,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-startup-buffer-multi-digit-delay 0.4
 
    ;; If non-nil, show file icons for entries and headings on Spacemacs home buffer.
-   ;; This has no effect in terminal or if "all-the-icons" package or the font
+   ;; This has no effect in terminal or if "nerd-icons" package or the font
    ;; is not installed. (default nil)
    dotspacemacs-startup-buffer-show-icons nil
 
@@ -284,6 +284,9 @@ It should only modify the values of Spacemacs settings."
                                :size 10.0
                                :weight normal
                                :width normal)
+
+   ;; Default icons font, it can be `all-the-icons' or `nerd-icons'.
+   dotspacemacs-default-icons-font 'all-the-icons
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
@@ -358,6 +361,10 @@ It should only modify the values of Spacemacs settings."
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
+   ;; It is also possible to use a posframe with the following cons cell
+   ;; `(posframe . position)' where position can be one of `center',
+   ;; `top-center', `bottom-center', `top-left-corner', `top-right-corner',
+   ;; `top-right-corner', `bottom-left-corner' or `bottom-right-corner'
    ;; (default 'bottom)
    dotspacemacs-which-key-position 'bottom
 
@@ -367,6 +374,30 @@ It should only modify the values of Spacemacs settings."
    ;; displays the buffer in a same-purpose window even if the buffer can be
    ;; displayed in the current window. (default nil)
    dotspacemacs-switch-to-buffer-prefers-purpose nil
+
+   ;; Make consecutive tab key presses after commands such as
+   ;; `spacemacs/alternate-buffer' (SPC TAB) cycle through previous
+   ;; buffers/windows/etc. Please see the option's docstring for more information.
+   ;; Set the option to t in order to enable cycling for all current and
+   ;; future cycling commands. Alternatively, choose a subset of the currently
+   ;; supported commands: '(alternate-buffer alternate-window). (default nil)
+   dotspacemacs-enable-cycling nil
+
+   ;; Whether side windows (such as those created by treemacs or neotree)
+   ;; are kept or minimized by `spacemacs/toggle-maximize-window' (SPC w m).
+   ;; (default t)
+   dotspacemacs-maximize-window-keep-side-windows t
+
+   ;; If nil, no load-hints enabled. If t, enable the `load-hints' which will
+   ;; put the most likely path on the top of `load-path' to reduce walking
+   ;; through the whole `load-path'. It's an experimental feature to speedup
+   ;; Spacemacs on Windows. Refer the FAQ.org "load-hints" session for details.
+   dotspacemacs-enable-load-hints nil
+
+   ;; If t, enable the `package-quickstart' feature to avoid full package
+   ;; loading, otherwise no `package-quickstart' attemption (default nil).
+   ;; Refer the FAQ.org "package-quickstart" section for details.
+   dotspacemacs-enable-package-quickstart nil
 
    ;; If non-nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
@@ -485,9 +516,15 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-persistent-server nil
 
    ;; List of search tool executable names. Spacemacs uses the first installed
-   ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
-   ;; (default '("rg" "ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
+   ;; tool of the list. Supported tools are `rg', `ag', `ack' and `grep'.
+   ;; (default '("rg" "ag" "ack" "grep"))
+   dotspacemacs-search-tools '("rg" "ag" "ack" "grep")
+
+   ;; The backend used for undo/redo functionality. Possible values are
+   ;; `undo-redo', `undo-fu' and `undo-tree' see also `evil-undo-system'.
+   ;; Note that saved undo history does not get transferred when changing
+   ;; your undo system from or to undo-tree. (default `undo-redo')"
+   dotspacemacs-undo-system 'undo-redo
 
    ;; Format specification for setting the frame title.
    ;; %a - the `abbreviated-file-name', or `buffer-name'
@@ -524,6 +561,9 @@ It should only modify the values of Spacemacs settings."
    ;; to aggressively delete empty line and long sequences of whitespace,
    ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
+   ;; The variable `global-spacemacs-whitespace-cleanup-modes' controls
+   ;; which major modes have whitespace cleanup enabled or disabled
+   ;; by default.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup nil
 
@@ -609,7 +649,8 @@ This function is called at the very end of Spacemacs initialization."
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   '(custom-enabled-themes '(sanityinc-solarized-light))
+   '(copilot-indent-offset-warning-disable t)
+   '(custom-enabled-themes '(sanityinc-solarized-dark))
    '(custom-safe-themes
      '("6819104c5f7d70485b32c10323aa396806d282fcee5b707e462bf3d156f44c39"
        "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4"
@@ -641,19 +682,20 @@ This function is called at the very end of Spacemacs initialization."
    '(lsp-ui-doc-delay 1.0)
    '(lsp-ui-doc-enable nil)
    '(package-selected-packages
-     '(ac-ispell ace-jump-helm-line ace-link ace-window add-node-modules-path aggressive-indent alchemist
-                 alert all-the-icons anaconda-mode ansible ansible-doc anzu async auto-compile
-                 auto-complete auto-highlight-symbol auto-yasnippet avy bind-key bind-map blacken
-                 browse-at-remote bui bundler caml cargo centered-cursor-mode chruby clang-format
-                 clean-aindent-mode color-theme-sanityinc-solarized column-enforce-mode company
-                 company-anaconda company-ansible company-emoji company-go company-terraform
-                 company-web concurrent counsel counsel-gtags csv-mode ctable cython-mode dap-mode
-                 dash dash-functional deferred define-word devdocs diminish dotenv-mode dumb-jump dune
-                 editorconfig elisp-slime-nav elixir-mode emmet-mode emoji-cheat-sheet-plus emojify
-                 emr epc epl eval-sexp-fu evil evil-anzu evil-args evil-cleverparens evil-collection
-                 evil-ediff evil-escape evil-exchange evil-goggles evil-iedit-state evil-indent-plus
-                 evil-lion evil-lisp-state evil-magit evil-matchit evil-mc evil-nerd-commenter
-                 evil-numbers evil-org evil-surround evil-textobj-line evil-tutor evil-unimpaired
+     '(ac-ispell ace-jump-helm-line ace-link ace-window add-node-modules-path aggressive-indent aio
+                 alchemist alert all-the-icons anaconda-mode ansible ansible-doc anzu async
+                 auto-compile auto-complete auto-highlight-symbol auto-yasnippet avy bind-key bind-map
+                 blacken browse-at-remote bui bundler caml cargo centered-cursor-mode chruby
+                 clang-format clean-aindent-mode color-theme-sanityinc-solarized column-enforce-mode
+                 company company-anaconda company-ansible company-emoji company-go
+                 company-nixos-options company-terraform company-web concurrent copilot copilot-chat
+                 counsel counsel-gtags csv-mode ctable cython-mode dap-mode dash dash-functional
+                 deferred define-word devdocs diminish dotenv-mode dumb-jump dune editorconfig
+                 elisp-slime-nav elixir-mode emmet-mode emoji-cheat-sheet-plus emojify emr epc epl
+                 eval-sexp-fu evil evil-anzu evil-args evil-cleverparens evil-collection evil-ediff
+                 evil-escape evil-exchange evil-goggles evil-iedit-state evil-indent-plus evil-lion
+                 evil-lisp-state evil-magit evil-matchit evil-mc evil-nerd-commenter evil-numbers
+                 evil-org evil-surround evil-textobj-line evil-tutor evil-unimpaired
                  evil-visual-mark-mode evil-visualstar expand-region eyebrowse f fancy-battery
                  fill-column-indicator flx flx-ido flycheck flycheck-credo flycheck-elsa
                  flycheck-ocaml flycheck-package flycheck-pos-tip flycheck-rust font-lock+
@@ -664,31 +706,33 @@ This function is called at the very end of Spacemacs initialization."
                  graphviz-dot-mode grizzl groovy-imports groovy-mode haml-mode hcl-mode helm helm-ag
                  helm-c-yasnippet helm-company helm-core helm-css-scss helm-descbinds helm-flx
                  helm-git-grep helm-gitignore helm-gtags helm-ls-git helm-lsp helm-make
-                 helm-mode-manager helm-org helm-org-rifle helm-projectile helm-purpose helm-pydoc
-                 helm-swoop helm-themes helm-xref hierarchy highlight-indentation highlight-numbers
-                 highlight-parentheses hl-todo ht htmlize hungry-delete hybrid-mode hydra iedit
-                 imenu-list impatient-mode import-js importmagic indent-guide inf-ruby ivy jinja2-mode
-                 journalctl-mode js-doc js2-mode js2-refactor json-mode json-navigator json-reformat
-                 json-snatcher let-alist link-hint list-utils live-py-mode livid-mode log4e
-                 lorem-ipsum lsp-java lsp-mode lsp-python-ms lsp-treemacs lsp-ui lv macrostep magit
-                 magit-gitflow magit-popup magit-section magit-svn markdown-mode markdown-toc
-                 maven-test-mode meghanada memoize merlin minitest mmm-mode move-text multiple-cursors
-                 mvn nameless nodejs-repl ob-elixir ocp-indent open-junk-file org-brain org-bullets
+                 helm-mode-manager helm-nixos-options helm-org helm-org-rifle helm-projectile
+                 helm-purpose helm-pydoc helm-swoop helm-themes helm-xref hierarchy
+                 highlight-indentation highlight-numbers highlight-parentheses hl-todo ht htmlize
+                 hungry-delete hybrid-mode hydra iedit imenu-list impatient-mode import-js importmagic
+                 indent-guide inf-ruby ivy jinja2-mode journalctl-mode js-doc js2-mode js2-refactor
+                 json-mode json-navigator json-reformat json-snatcher let-alist link-hint list-utils
+                 live-py-mode livid-mode log4e lorem-ipsum lsp-java lsp-mode lsp-python-ms
+                 lsp-treemacs lsp-ui lv macrostep magit magit-gitflow magit-popup magit-section
+                 magit-svn markdown-mode markdown-toc maven-test-mode mcp meghanada memoize merlin
+                 minitest mmm-mode move-text multiple-cursors mvn nameless nix-mode nixos-options
+                 nodejs-repl ob-elixir ocp-indent open-junk-file org-brain org-bullets
                  org-category-capture org-cliplink org-download org-mime org-plus-contrib org-pomodoro
                  org-present org-projectile org-superstar orgit overseer package-lint packed paradox
                  paredit parent-mode password-generator pcache pcre2el persp-mode pfuture
-                 pip-requirements pipenv pippel pkg-info popup popwin pos-tip posframe powerline
-                 prettier-js projectile pug-mode py-isort pyenv-mode pytest pythonic pyvenv racer
-                 rainbow-delimiters rake rbenv request restart-emacs rjsx-mode robe rspec-mode rubocop
-                 rubocopfmt ruby-hash-syntax ruby-refactor ruby-test-mode ruby-tools rust-mode rvm s
-                 sass-mode scss-mode seeing-is-believing simple-httpd skewer-mode slim-mode
-                 smartparens smeargle spaceline spaceline-all-the-icons spinner sql-indent sqlup-mode
-                 string-inflection swiper symbol-overlay symon systemd tagedit tern terraform-mode
-                 tide toc-org toml-mode transient treemacs treemacs-evil treemacs-icons-dired
-                 treemacs-magit treemacs-persp treemacs-projectile tuareg typescript-mode undo-tree
-                 use-package utop uuidgen vi-tilde-fringe visual-fill-column volatile-highlights
-                 web-beautify web-completion-data web-mode which-key window-purpose winum with-editor
-                 writeroom-mode ws-butler yaml-mode yapfify yasnippet yasnippet-snippets))
+                 pip-requirements pipenv pippel pkg-info polymode popup popwin pos-tip posframe
+                 powerline prettier-js projectile pug-mode py-isort pyenv-mode pytest pythonic pyvenv
+                 racer rainbow-delimiters rake rbenv request restart-emacs rjsx-mode robe rspec-mode
+                 rubocop rubocopfmt ruby-hash-syntax ruby-refactor ruby-test-mode ruby-tools rust-mode
+                 rvm s sass-mode scss-mode seeing-is-believing shell-maker simple-httpd skewer-mode
+                 slim-mode smartparens smeargle spaceline spaceline-all-the-icons spinner sql-indent
+                 sqlup-mode string-inflection swiper symbol-overlay symon systemd tagedit tern
+                 terraform-mode tide toc-org toml-mode transient treemacs treemacs-evil
+                 treemacs-icons-dired treemacs-magit treemacs-persp treemacs-projectile tuareg
+                 typescript-mode undo-tree use-package utop uuidgen vi-tilde-fringe visual-fill-column
+                 volatile-highlights web-beautify web-completion-data web-mode which-key
+                 window-purpose winum with-editor writeroom-mode ws-butler yaml-mode yapfify yasnippet
+                 yasnippet-snippets))
    '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
    '(safe-local-variable-values
      '((create-lockfiles) (go-backend . go-mode) (go-backend . lsp)))
