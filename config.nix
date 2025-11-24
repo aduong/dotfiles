@@ -11,7 +11,6 @@
           autojump
           awscli2
           bazelisk
-          calibre
           crane
           cowsay
           curl
