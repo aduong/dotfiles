@@ -11,7 +11,10 @@ import XMonad.Layout.NoBorders
 
 main = xmonad $ docks xfceConfig
   { modMask = mod4Mask
-  , manageHook = (className =? "Xfce4-notifyd" --> doIgnore) <+> fullscreenManageHook <+> manageHook xfceConfig
+  , manageHook = composeAll
+      [ className =? "Xfce4-notifyd" --> doIgnore
+      , title =? "Recording" --> doIgnore
+      ] <+> fullscreenManageHook <+> manageHook xfceConfig
   , layoutHook = smartBorders $ fullscreenFull $ avoidStruts $ (layoutHook xfceConfig ||| Column 1 ||| Mirror (Column 1))
   , handleEventHook = fullscreenEventHook
   , focusFollowsMouse = False
