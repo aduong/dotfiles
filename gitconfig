@@ -49,3 +49,5 @@
 	insteadOf = https://github.com/
 [advice]
 	skippedCherryPicks = false
+[init]
+	defaultBranch = main
