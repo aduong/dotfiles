@@ -58,11 +58,12 @@ This function should only modify configuration layer settings."
      emacs-lisp
      git
      github-copilot
-     helm
+     ;; helm
      html
      (javascript :variables
                  javascript-backend 'tide
                  js-indent-level 2)
+     ivy
      lsp
      markdown
      multiple-cursors
