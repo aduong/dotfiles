@@ -26,7 +26,6 @@
           gotools
           graphviz
           htop
-          iotop
           jq
           krew
           kubectl
