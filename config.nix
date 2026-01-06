@@ -67,6 +67,7 @@
           tilt
           traceroute
           tree
+          v4l-utils
           vault
           vlc
           xclip
