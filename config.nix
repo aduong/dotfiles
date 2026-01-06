@@ -33,6 +33,7 @@
           kubelogin-oidc
           kubernetes-helm
           kustomize
+          magic-wormhole
           minikube
           mosh
           navi
