@@ -36,8 +36,8 @@ alias server='python -mSimpleHTTPServer'
 alias uri-escape='perl -MURI::Escape -E '\''foreach (@ARGV) { say uri_escape $_ }'\'
 alias uri-unescape='perl -MURI::Escape -E '\''foreach (@ARGV) { say uri_unescape $_ }'\'
 
-alias cbcopy='xsel --clipboard -i'
-alias cbpaste='xsel --clipboard -o'
+alias cbcopy='xclip -selection clipboard -i'
+alias cbpaste='xclip -selection clipboard -o'
 
 test -s ~/.xfce_aliases && . ~/.xfce_aliases
 
