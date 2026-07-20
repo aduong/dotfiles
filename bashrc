@@ -119,3 +119,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 eval "$(fzf --bash)"
+
+[[ -e ~/snap/bitwarden/current/.bitwarden-ssh-agent.sock ]] && export SSH_AUTH_SOCK=~/snap/bitwarden/current/.bitwarden-ssh-agent.sock
