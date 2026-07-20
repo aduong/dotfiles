@@ -653,13 +653,14 @@ This function is called at the very end of Spacemacs initialization."
    '(copilot-indent-offset-warning-disable t)
    '(custom-enabled-themes '(sanityinc-solarized-dark))
    '(custom-safe-themes
-     '("6819104c5f7d70485b32c10323aa396806d282fcee5b707e462bf3d156f44c39"
+     '("48d34b6afe72407ca494387c8bea495bb2deee96bd88516f302db1f11e1810a1"
+       "6819104c5f7d70485b32c10323aa396806d282fcee5b707e462bf3d156f44c39"
        "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4"
        "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default))
    '(evil-want-Y-yank-to-eol nil)
    '(fill-column 100)
    '(gc-cons-threshold 1000000000)
-   '(helm-completion-style 'emacs)
+   '(helm-completion-style 'emacs t)
    '(hl-todo-keyword-faces
      '(("TODO" . "#dc752f") ("NEXT" . "#dc752f") ("THEM" . "#2d9574") ("PROG" . "#4f97d7")
        ("OKAY" . "#4f97d7") ("DONT" . "#f2241f") ("FAIL" . "#f2241f") ("DONE" . "#86dc2f")
