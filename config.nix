@@ -22,8 +22,9 @@
           gcal
           gh
           git
-          gnupg
-          gotools
+          gomplate
+          (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
+          (lib.lowPrio gotools)
           graphviz
           htop
           jq
@@ -34,18 +35,21 @@
           kubernetes-helm
           kustomize
           magic-wormhole
-          minikube
+          (lib.lowPrio minikube)
+          (lib.lowPrio moreutils)
           mosh
           navi
           ncdu
           ngrok
           nmap
+          nodejs_26
           ntp
           obsidian
           openssh
           packer
           parallel
           pgcli
+          pnpm
           postgresql_16
           pre-commit
           pssh
@@ -59,7 +63,10 @@
           s6
           shellcheck
           shfmt
+          socat
+          sox
           spotify
+          sqlite-interactive
           starship
           stern
           terraform
@@ -73,6 +80,7 @@
           xclip
           xournalpp
           yamllint
+          yubikey-manager
           yq
           zx
         ];
