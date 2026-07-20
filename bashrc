@@ -121,3 +121,5 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(fzf --bash)"
 
 [[ -e ~/snap/bitwarden/current/.bitwarden-ssh-agent.sock ]] && export SSH_AUTH_SOCK=~/snap/bitwarden/current/.bitwarden-ssh-agent.sock
+
+[[ -e ~/.nix-profile/share/autojump/autojump.bash ]] && . ~/.nix-profile/share/autojump/autojump.bash
