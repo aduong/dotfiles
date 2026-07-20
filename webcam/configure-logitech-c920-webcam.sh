@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-exec &>> /var/log/configure-logitech-c920-webcam.log
+exec &>> ${LOGFILE:-/var/log/configure-logitech-c920-webcam.log}
 
 date
 echo "Setting ${DEVNAME} focus and zoom"
@@ -13,3 +13,5 @@ fi
 
 v4l2-ctl -d "${DEVNAME}" --set-ctrl focus_automatic_continuous=0 
 v4l2-ctl -d "${DEVNAME}" --set-ctrl focus_absolute=0,zoom_absolute=150
+
+echo "Set ${DEVNAME} focus=0 and zoom=150"
