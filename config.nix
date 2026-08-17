@@ -84,6 +84,9 @@
           yq
           zx
         ];
+        postBuild = ''
+          rm -f $out/bin/sha256sum
+        '';
       };
     };
 }
