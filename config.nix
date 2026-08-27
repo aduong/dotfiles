@@ -14,7 +14,6 @@
           crane
           cowsay
           curl
-          discord
           emacs
           evince
           figlet
