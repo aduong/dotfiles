@@ -287,7 +287,6 @@ nix_install() {
 
 snap_install() {
   sudo snap install \
-    bitwarden \
     bw \
     discord \
     goland \
