@@ -4,6 +4,7 @@
 [core]
 	editor = emacsclient -c
 	pager = less --ignore-case --chop-long-lines --RAW-CONTROL-CHARS
+	excludesFile = ~/.gitignore
 [color]
 	ui = true
 [merge]

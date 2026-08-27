@@ -51,6 +51,7 @@
           pnpm
           postgresql_16
           pre-commit
+          prek
           pssh
           pv
           redis
