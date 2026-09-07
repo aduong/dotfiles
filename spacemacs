@@ -57,7 +57,6 @@ This function should only modify configuration layer settings."
      ;; better-defaults
      emacs-lisp
      git
-     github-copilot
      ;; helm
      html
      (javascript :variables
