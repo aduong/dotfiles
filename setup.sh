@@ -374,6 +374,11 @@ EOF
   rm -rf "${tmpdir}"
 }
 
+cargo_install() {
+  rustup default stable
+  cargo install viddy
+}
+
 main() {
   nix_install
   sudo apt-get update
@@ -414,6 +419,7 @@ main() {
 
   # TODO signal
 
+  cargo_install
 }
 
 if [[ $0 != bash ]]; then
