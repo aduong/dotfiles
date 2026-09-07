@@ -5,9 +5,7 @@ packages=(
   github.com/aduong/gopkggraph@latest
   github.com/cespare/reflex@latest
   github.com/go-delve/delve/cmd/dlv@latest
-  github.com/golangci/golangci-lint/cmd/golangci-lint@v1.45.2
   golang.org/x/tools/gopls@latest
-  # github.com/kubernetes-sigs/kustomize # seems to be broken as of 2021-04-20
 
 )
 
